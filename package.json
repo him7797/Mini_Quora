@@ -1,0 +1,27 @@
+{
+  "name": "mini_quora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/him7797/Mini_Quora.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/him7797/Mini_Quora/issues"
+  },
+  "homepage": "https://github.com/him7797/Mini_Quora#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "mongoose": "^5.10.14",
+    "nodemon": "^2.0.6",
+    "winston": "^3.3.3"
+  }
+}
