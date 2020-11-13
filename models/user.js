@@ -34,6 +34,10 @@ const User = mongoose.Schema({
       type: Array,
       required:true
     },
+    dob:{
+      type:Date,
+      required:true
+    },
     posts:{
         type: Array,
     },
