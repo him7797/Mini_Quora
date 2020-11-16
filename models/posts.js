@@ -16,31 +16,30 @@ const Posts = mongoose.Schema({
       type: String,
       required: true,
     },
-    likes:{
+    totalLikes:{
+      type:Number,
+      default:0
+    },
+    totalComments:{
       type:Number,
       default:0
     },
     comments:{
-      type: Array,
-      default:[{
-          createdBy:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-          },
-          createdAt: {
-            type: Date,
-            default: Date.now
-           },
-           likes:{
-            type:Number,
-            default:0
-          },
-        }]
+     type:Array
     },
     tags:{
         type:Array,
         required:true
-    }
+    },
+    postBy:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'User'
+    },
+    createdAt:{
+      type: Date,
+      default: Date.now
+    },
+
    
   },{timestamps: true});
 

@@ -11,38 +11,39 @@ const User = mongoose.Schema({
       maxlength: 100
     },
     about:{
-        type:String
+        type:String,
     },
     password: {
       type: String,
       required:true,
-      maxlength:10
+      
     },
     phone: {
       type: String,
       required: true,
-      unique:true,
       minlength: 10,
       maxlength: 10
     },
     email:{
       type:String,
       required:true,
-      unique:true
+      
     },
-    interest:{
+    photo:{
+      type:String,
+    },
+    interests:{
       type: Array,
-      required:true
-    },
-    dob:{
-      type:Date,
-      required:true
+     
     },
     posts:{
         type: Array,
     },
     bookmark:{
         type:Array
+    },
+    following:{
+      type:Array
     }
   },{timestamps: true});
 
@@ -50,5 +51,9 @@ const User = mongoose.Schema({
     const token=jwt.sign({_id:this._id},config.get('jwtPrivateKey'));
     return token;
   }
+
+
+
+
 
   module.exports = mongoose.model('User', User);

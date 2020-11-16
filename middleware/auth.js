@@ -8,8 +8,11 @@ module.exports=function (req,res,next){
         req.user=decoded;
         next();
     }
-    catch(ex){
-        res.status(400).send('invalid token');
+    catch(error){
+        return res.status(401).json({
+            status: "Failed",
+            message: 'Please login to continue'
+        });
     }
     
 }
