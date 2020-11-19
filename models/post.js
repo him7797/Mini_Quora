@@ -13,10 +13,12 @@ const Posts = mongoose.Schema({
       required: true,
     },
     
-    answers:{
-     type:Array,
-     
-    },
+    answers:[{
+      answerId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Answers'
+      }
+    }],
     totalAnswers:{
       type:Number,
       default:0

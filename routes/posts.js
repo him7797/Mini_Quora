@@ -33,10 +33,10 @@ Router.post('/',upload.single('photo'),async(req,res)=>{
    let doc=new Post(obj);
    let result=await doc.save();
    let updateDoc={
-      $push:
-      {
-        posts:result._id
-      },
+     $push:{
+      posts:[{postId:result._id}]
+     }
+     ,
       $addToSet:
       {
         interests:tags
@@ -51,7 +51,9 @@ Router.get('/',async(req,res)=>{
    res.send(result);
 });
 
-
+Router.get('/posts/byUser',async(req,res)=>{
+        
+});
 
 
 

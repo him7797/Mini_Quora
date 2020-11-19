@@ -20,16 +20,21 @@ Router.post('/',async(req,res)=>{
    let totalanswers=await Post.findById(createdOn);
    totalanswers=totalanswers.totalAnswers;
    let postUpdate={
-    $push:
-    {
-      answers:result._id
-    },
+    $push:{
+      answers:[{answerId:result._id}]
+     },
     $set:{
         totalAnswers:totalanswers+1
     }
     
+   };
+   let userUpdate={
+    $push:{
+      answers:[{answerId:result._id}]
+     }
    }
-   await User.updateOne({_id:createdBy},{$push:{answers:result._id}});
+
+   await User.updateOne({_id:createdBy},userUpdate);
    await Post.updateOne({_id:createdOn},postUpdate);
    res.send(result);
 });

@@ -29,6 +29,10 @@ const User = mongoose.Schema({
       required:true,
       
     },
+    dob:{
+     type:String,
+     required:true
+    },
     photo:{
       type:String,
     },
@@ -36,12 +40,18 @@ const User = mongoose.Schema({
       type: Array,
      
     },
-    posts:{
-        type: Array,
-    },
-    answers:{
-      type:Array
-    },
+    posts:[{
+      postId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Posts'
+      }
+    }],
+    answers:[{
+      answerId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Answers'
+      }
+    }],
     bookmark:{
         type:Array
     },

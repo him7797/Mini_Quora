@@ -22,7 +22,7 @@ const upload = multer({storage: entityStorage});
 
 
 
-Router.post('/signUp',upload.single('photo'),async(req,res)=>{
+Router.post('/signUp',async(req,res)=>{
         let obj={
           name:req.body.name,
           email:req.body.email,
@@ -47,7 +47,8 @@ Router.post('/signUp',upload.single('photo'),async(req,res)=>{
             phone:req.body.phone,
             password:req.body.password,
             about:req.body.profession,
-            photo:req.file.path
+            dob:req.body.dob
+            
         }
         let newUser=new User(finalObj);
         const salt=await bcrypt.genSalt(10);
