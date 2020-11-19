@@ -1,0 +1,41 @@
+const mongoose = require('mongoose');
+const jwt=require('jsonwebtoken');
+const config=require('config');
+
+
+const Posts = mongoose.Schema({
+    title: {
+      type: String,
+      required: true
+    },
+    photo: {
+      type: String,
+      required: true,
+    },
+    
+    answers:{
+     type:Array,
+     
+    },
+    totalAnswers:{
+      type:Number,
+      default:0
+    },
+    tags:{
+        type:Array,
+        required:true
+    },
+    postBy:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'User',
+      required:true
+    },
+    status:{
+      type:Boolean,
+      default:true
+    }
+  },{timestamps: true});
+
+
+
+  module.exports = mongoose.model('Posts', Posts);

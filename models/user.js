@@ -39,6 +39,9 @@ const User = mongoose.Schema({
     posts:{
         type: Array,
     },
+    answers:{
+      type:Array
+    },
     bookmark:{
         type:Array
     },

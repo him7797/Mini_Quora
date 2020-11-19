@@ -147,10 +147,15 @@ Router.post('/otp',async(req,res)=>{
 });
 
 
-Router.post('/change-Password',async(req,res)=>{
+Router.post('/change-Password-otp',async(req,res)=>{
       let newPass=req.body.newPass;
       let phone=req.body.phone;
       let code=req.body.code;
+      let checPass=await Validation.validatePassword(newPass);
+        if(checPass==false)
+        {
+          res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
+        }
       let doc=await forgotPassword.findOne({code:code,status:false,phone:phone});
       if(doc)
       {
@@ -158,8 +163,8 @@ Router.post('/change-Password',async(req,res)=>{
         newPass=await bcrypt.hash(newPass,salt);
         let result=await User.updateOne({phone:phone},{$set:{password:newPass}});
         return res.status(200).json({
-          status: "Succes",
-          message: "Successfully Password Changed"
+          status: "Success",
+          message: "Password Successfully Changed!"
       });
       }
       else{
@@ -171,8 +176,58 @@ Router.post('/change-Password',async(req,res)=>{
 });
 
 
+Router.post('/change-password-email',async(req,res)=>{
+    let email=req.body.email;
+    let oldPas=req.body.oldPas;
+    let newPas=req.body.newPas;
+    let checPass=await Validation.validatePassword(newPass);
+      if(checPass==false)
+      {
+          res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
+      }
+    let doc=await User.findOne({email:email});
+    if(doc)
+    {
+      const validPassword=await bcrypt.compare(oldPas,doc.password);
+      if(!validPassword) return res.status(400).send('Invalid password');
+      const salt=await bcrypt.genSalt(10);
+      newPass=await bcrypt.hash(newPass,salt);
+      await User.updateOne({email:email},{$set:{password:newPas}}); 
+      return res.status(200).json({
+        status: "Success",
+        message: " Password Successfully Changed!"
+    });
+    }
+    return res.status(401).json({
+      status: "Failed",
+      message: "User with given Email not found."
+  });
+});
 
+Router.post('/change/ProfilePic',upload.single('photo'),async(req,res)=>{
+      let email=req.body.email;
+      let userInfo=await User.findOne({email:email});
+      if(userInfo)
+      {
+        await User.updateOne({email:email},{$set:{photo:req.file.path}});
+        return res.status(200).json({
+          message: " Profile Picture Successfully Changed!"
+      });
+      }
+      return res.status(401).json({
+        status: "Failed",
+        message: "User with given Email not found."
+    });
+});
 
+// Router.post('/update/userInfo/:id',async(req,res)=>{
+//      let _id=re.params._id;
+//      let userInfo=await User.findById(_id);
+//      if(userInfo)
+//      {
+
+//      }
+// });
 
 
 module.exports=Router;
