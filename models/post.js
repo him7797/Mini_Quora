@@ -17,6 +17,9 @@ const Posts = mongoose.Schema({
       answerId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Answers'
+      },
+      createdAt:{
+        type:Date
       }
     }],
     totalAnswers:{

@@ -30,7 +30,7 @@ Router.post('/',async(req,res)=>{
    };
    let userUpdate={
     $push:{
-      answers:[{answerId:result._id}]
+      answers:[{answerId:result._id,createdAt:Date.now()}]
      }
    }
 
@@ -44,7 +44,16 @@ Router.put('/like/:id',async(req,res)=>{
   if(result)
   {
       let totallikes=result.totalLikes;
-      await Answer.updateOne({_id:req.params.id},{$set:{totalLikes:totallikes+1}});
+      let userInfo=req.body.userid
+      let doc={
+        $set:{
+          totalLikes:totallikes+1
+        },
+        $push:{
+          likesBy:[{likedBy:userInfo},{createdAt:Date.now()}]
+         }
+      }
+      await Answer.updateOne({_id:req.params.id},doc);
       return res.status(200).json({
         status: "Success",
         message: "Updated"
@@ -63,7 +72,16 @@ Router.put('/disLike/:id',async(req,res)=>{
     if(result)
     {
         let totalDislikes=result.totalDisLikes;
-        await Answer.updateOne({_id:req.params.id},{$set:{totalDisLikes:totalDislikes+1}});
+        let userInfo=req.body.userid
+        let doc={
+          $set:{
+            totalDisLikes:totalDislikes+1
+          },
+          $push:{
+            disLikeBy:[{disLikedBy:userInfo},{createdAt:Date.now()}]
+           }
+        }
+        await Answer.updateOne({_id:req.params.id},doc);
         return res.status(200).json({
           status: "Success",
           message: "Updated"

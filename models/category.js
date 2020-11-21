@@ -19,9 +19,6 @@ const Category = mongoose.Schema({
     followersCount:{
         type:Number,
         default:0
-    },
-    posts:{
-        type:Array,
     }
     
   },{timestamps: true});

@@ -25,12 +25,24 @@ const Answers = mongoose.Schema({
         type:Number,
         default:0
     },
-    likesBy:{
-        type:Array,
-    },
-    disLikeBy:{
-        type:Array,
-    }
+    likesBy:[{
+        likedBy:{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        },
+        createdAt:{
+          type:Number
+        }
+      }],
+    disLikeBy:[{
+        disLikedBy:{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        },
+        createdAt:{
+          type:Number
+        }
+      }]
     
   },{timestamps: true});
 

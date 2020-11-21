@@ -51,8 +51,9 @@ Router.get('/',async(req,res)=>{
    res.send(result);
 });
 
-Router.get('/posts/byUser',async(req,res)=>{
-        
+Router.get('/:id',async(req,res)=>{
+  let post=await Post.findById(req.params.id).populate('postBy').populate('answers.answerId');
+  res.send(post);
 });
 
 

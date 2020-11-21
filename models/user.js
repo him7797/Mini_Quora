@@ -44,7 +44,8 @@ const User = mongoose.Schema({
       postId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Posts'
-      }
+      },
+
     }],
     answers:[{
       answerId:{
