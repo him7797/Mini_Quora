@@ -15,10 +15,10 @@ module.exports=function(app){
     app.use('/api/home',home);
     app.use('/api/category',category);
     
-    // app.use('/api/customerReviews',customReview);
+    
    
 }
-// router.use('/home',auth,home);
+
 
 
 

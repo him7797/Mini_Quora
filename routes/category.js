@@ -55,4 +55,11 @@ Router.post('/follow/:id',async(req,res)=>{
     res.send('Success');
 
 });
+
+Router.get('/:id',async(req,res)=>{
+    let userInfo=await Post.findById(req.params.id);
+    const Path="F:\MiniQuora\Mini_Quora";
+    let filepath=path+userInfo.photo;
+    res.sendFile(filepath);
+})
 module.exports=Router;
