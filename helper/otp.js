@@ -1,6 +1,6 @@
-const authkey="300607AOPlLKzjIw2P5db160cf";
-const endpoint="https://control.msg91.com/api/";
-const Request=require('request');
+const Config=require('../config/config');
+const authkey=Config.msg91.authkey;
+const endpoint=Config.msg91.endpoint;
 const axios=require('axios');
 
 module.exports={
