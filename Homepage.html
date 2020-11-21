@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>HomePage</title>
+
+    <!-- CSS  -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            ;
+        }
+
+        .navbar {
+            background-color: #FFFFFF !important;
+            height: 50px;
+
+        }
+
+        nav a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 27px;
+            color: #303030;
+        }
+
+        nav a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .links .active {
+            color: #FF3B3B;
+
+        }
+
+        .links .active:hover {
+            color: #FF3B3B;
+        }
+
+        .add_question {
+            background: #FF3C3C;
+            border-radius: 2px !important;
+            font-family: Poppins;
+            font-style: normal;
+            font-size: 17px;
+            line-height: 20px;
+            text-transform: uppercase;
+            text-align: center;
+            color: #FFFFFF;
+            float: right;
+
+        }
+
+        .add_question:hover {
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .navbar-brand {
+            font-family: Merriweather;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 30px;
+            color: #FF3B3B !important;
+            margin-right: 100px;
+        }
+
+        .searchbar {
+            width: 550px;
+            height: 33px;
+            border: 1px solid #EFEFEF;
+            box-sizing: border-box;
+            box-shadow: 0;
+            margin-right: 100%;
+        }
+
+        .searchbar input {
+            width: 550px;
+            height: 33px;
+            background: #FFFFFF;
+            border: 1px solid #EFEFEF;
+            box-sizing: border-box;
+            box-shadow: 0;
+        }
+
+        .search_button {
+            background: #FF3B3B;
+            height: 33px;
+            align-items: center;
+            text-align: center !important;
+            border: 1px solid #EFEFEF;
+            box-sizing: border-box;
+            box-shadow: 0;
+
+        }
+
+        .search_button:hover {
+            background: #FF3B3B;
+
+        }
+
+        .searchbar .form-control:focus {
+            border-color: #FF3B3B;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+        }
+
+        .searchbar i {
+            color: #FFFFFF;
+            align-items: center !important;
+        }
+
+        .material-icons {
+            display: flex;
+            line-height: 0.9px;
+            text-align: center;
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .navbar_elements {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container-fluid {
+            margin-top: 30px;
+        }
+
+        .mainBody {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sidePanel {
+            background-color: #E5E5E5;
+            width: 71px;
+            height: 21px;
+            left: 34px;
+            top: 9px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #303030;
+            left: 2px;
+
+
+        }
+
+        .sidePanel ul li {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .sidePanel img {
+            margin-right: 10px;
+        }
+
+        .mainPanel {}
+
+
+        .question_card {
+            background: #FFFFFF;
+            border: 1px solid #EFEFEF;
+            box-sizing: border-box;
+            border-radius: 4px;
+            width: 100% !important;
+            height: 300px;
+            overflow: scroll;
+        }
+
+        .question_card::-webkit-scrollbar {
+            display: none;
+        }
+
+        .profile_name {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 30px;
+            color: #303030;
+
+        }
+
+        .profile_name .form-control {
+            border-style: hidden;
+        }
+
+        .profile_name .form-control:focus {
+            border-style: groove;
+            border-color: #FF3B3B;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+        }
+
+        .post_button {
+            position: absolute;
+            width: 150px;
+            height: 34px;
+            background: rgba(0, 67, 238, 0.5);
+            border-radius: 32px;
+            font-family: Poppins;
+            font-style: normal;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: -0.165px;
+            color: #FFFFFF;
+            right: 0;
+        }
+
+        .post_button:hover {
+            background: rgba(0, 67, 238, 0.5);
+            color: #FFFFFF;
+        }
+
+        .image_buttons {
+            display: flex;
+            flex-direction: row;
+            border: 1px;
+        }
+
+        .image_buttons span {
+            margin-right: 30px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height */
+
+            letter-spacing: -0.165px;
+
+            color: #303030;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        .profilePanel {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 150px;
+            background-color: #ffffff;
+            margin-right: 0px;
+            border-radius: 4px;
+
+        }
+
+        .profilename_span a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 30px;
+            /* identical to box height */
+
+            display: flex;
+            align-items: center;
+
+            color: #303030;
+
+        }
+
+        .profilename_span a:hover {
+            text-decoration: none;
+            color: #303030;
+
+        }
+
+        .detail_span a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+            display: flex;
+            align-items: center;
+
+            color: #4E4E4E;
+
+        }
+
+        .detail_span a:hover {
+            text-decoration: none;
+            color: #4E4E4E;
+        }
+
+
+        .logout_span a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+            display: flex;
+            align-items: center;
+
+            color: #FF3B3B;
+
+        }
+
+        .logout_span a:hover {
+            text-decoration: none;
+            color: #FF3B3B;
+        }
+
+
+        .image_span {
+            align-items: center;
+            margin: auto;
+            margin-top: -25px;
+            margin-bottom: 10px;
+        }
+
+        .image_span img {
+            height: 65px;
+            width: 65px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="row navbar_elements">
+            <div class="col-2">
+                <a class="navbar-brand" href="#">
+                    Mini-Quora
+                </a>
+            </div>
+            <div class="col-4">
+                <div class="searchbar">
+                    <div class="input-group">
+                        <input class="form-control" type="search"
+                            placeholder="Search any question running in your mind.....">
+                        <div class="input-group-append">
+                            <button class="btn search_button" type="button">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class=" col-3 links">
+                <a class="active" href="Homepage.html">Home</a>
+                <a href="">Following</a>
+                <a href="">Notifications</a>
+            </div>
+            <div class="col-2">
+                <a href="Login.html"><button type="button" class="btn add_question">ADD QUESTIONS</button></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row mainBody">
+            <div class="col-2 sidePanel">
+                <ul>
+                    <li><img src="assets/bullet.png"> Education</li>
+                    <li><img src="assets/bullet.png"> Sports</li>
+                    <li><img src="assets/bullet.png"> Technology</li>
+                    <li><img src="assets/bullet.png"> Entertainment</li>
+                </ul>
+            </div>
+
+            <div class="col-8 mainPanel">
+                <div class="card question_card">
+                    <div class="row card-body">
+                        <div class="col-2 profile_image"><img src="assets/profile.png"></div>
+                        <div class="col-10 profile_name">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Koshal Bothra</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    placeholder="Ask any questions running in your mind"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="formGroupExampleInput2"
+                                    placeholder="Enter tags to make your questions more reachable...">
+
+                            </div>
+                            <button type="button" class="btn post_button">POST QUESTIONS</button>
+                        </div>
+                    </div>
+                    <div class="image_buttons">
+                        <span><img src="assets/photo.png">Photos</span>
+                        <span><img src="assets/video.png">Videos</span>
+                        <span><img src="assets/doc.png">Documents</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 profilePanel">
+                <span class="image_span"><img src="assets/profile_panel.png"></span>
+                <span class="profilename_span"><a href="">Koshal Bothra</a></span>
+                <span class="detail_span"><a href="">Edit Details</a></span>
+                <span class="logout_span"><a href="">Logout</a></span>
+            </div>
+
+        </div>
+    </div>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>
