@@ -19,6 +19,13 @@
             ;
         }
 
+        .form-control:focus {
+            border-style: groove;
+            border-color: #FF3B3B;
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+        }
+
+
         .navbar {
             background-color: #FFFFFF !important;
             height: 50px;
@@ -150,10 +157,6 @@
 
         .sidePanel {
             background-color: #E5E5E5;
-            width: 71px;
-            height: 21px;
-            left: 34px;
-            top: 9px;
             font-family: Poppins;
             font-style: normal;
             font-weight: normal;
@@ -163,7 +166,6 @@
             flex-direction: column;
             align-items: center;
             color: #303030;
-            left: 2px;
 
 
         }
@@ -252,7 +254,6 @@
             letter-spacing: -0.165px;
 
             color: #303030;
-            margin-bottom: 10px;
             margin-left: 20px;
         }
 
@@ -341,6 +342,175 @@
             height: 65px;
             width: 65px;
         }
+
+        .question_panel {
+            width: 100%;
+        }
+
+        .answer_panel {
+            width: 100%;
+            padding-top: 40px;
+        }
+
+        .answer_card {
+            background: #FFFFFF;
+            border: 1px solid #EFEFEF;
+            box-sizing: border-box;
+            border-radius: 4px;
+            width: 100% !important;
+        }
+
+        .answer_name {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .asked_by {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height */
+            color: #303030;
+        }
+
+
+        .profession {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 18px;
+            /* identical to box height */
+
+
+            color: #4E4E4E;
+
+        }
+
+        .date_of_submission {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 18px;
+            /* identical to box height */
+            color: #3E3E3E;
+        }
+
+        .question_asked {
+            padding: 20px 5px;
+            overflow: scroll;
+        }
+
+        .question_asked::-webkit-scrollbar {
+            display: none;
+        }
+
+        .question_headline {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            color: #303030;
+            flex: none;
+            order: 0;
+            align-self: flex-start;
+            flex-grow: 0;
+            margin: 0px 16px;
+        }
+
+        .question_detail {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: #303030;
+            margin: 10px 16px;
+            text-align: left;
+        }
+
+        pre {
+            overflow: scroll;
+        }
+
+        pre::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tags_used span {
+            background: #FFFFFF;
+            border: 1px solid #FF3B3B;
+            box-sizing: border-box;
+            border-radius: 24px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            letter-spacing: -0.165px;
+            color: #FF3B3B;
+            margin-top: 10px;
+            margin-left: 16px;
+
+        }
+
+        .upvote_details span {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height */
+            letter-spacing: -0.165px;
+            color: #303030;
+            margin-top: 15px;
+            margin-left: 17px;
+        }
+
+        .upvote_buttons span {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.165px;
+            color: #303030;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .user_answer {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 18px;
+            /* identical to box height */
+            color: #383838;
+            margin-top: 20px;
+            margin-left: 2px;
+
+
+        }
+
+        .user_answer textarea {
+            overflow: hidden;
+        }
+
+        .user_answer textarea::-webkit-scrollbar {
+            display: none;
+        }
+
+        #exampleFormControlTextarea1 {
+            display: block;
+            overflow: hidden;
+            resize: none;
+        }
     </style>
 </head>
 
@@ -388,31 +558,105 @@
                     <li><img src="assets/bullet.png"> Entertainment</li>
                 </ul>
             </div>
-
             <div class="col-8 mainPanel">
-                <div class="card question_card">
-                    <div class="row card-body">
-                        <div class="col-2 profile_image"><img src="assets/profile.png"></div>
-                        <div class="col-10 profile_name">
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Koshal Bothra</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Ask any questions running in your mind"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="formGroupExampleInput2"
-                                    placeholder="Enter tags to make your questions more reachable...">
+                <div class="row question_panel">
+                    <div class="card question_card">
+                        <div class="row card-body">
+                            <div class="col-2 profile_image"><img src="assets/profile.png"></div>
+                            <div class="col-10 profile_name">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Koshal Bothra</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                        placeholder="Ask any questions running in your mind"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                                        placeholder="Enter tags to make your questions more reachable...">
 
+                                </div>
+                                <button type="button" class="btn post_button">POST QUESTIONS</button>
                             </div>
-                            <button type="button" class="btn post_button">POST QUESTIONS</button>
+                            <div class="image_buttons">
+                                <span><img src="assets/photo.png">Photos</span>
+                                <span><img src="assets/video.png">Videos</span>
+                                <span><img src="assets/doc.png">Documents</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="image_buttons">
-                        <span><img src="assets/photo.png">Photos</span>
-                        <span><img src="assets/video.png">Videos</span>
-                        <span><img src="assets/doc.png">Documents</span>
+                </div>
+
+                <div class="row answer_panel">
+                    <div class="card answer_card">
+                        <div class="card-body">
+                            <div class="row user_details">
+                                <div class="col-1 answer_image"><img src="assets/answer_photo.png"></div>
+                                <div class="col-9 answer_name ">
+                                    <span class="asked_by">Nitin Momaya</span>
+                                    <span class="profession">UX Designer</span>
+                                </div>
+                                <div class="col-2 date_of_submission">
+                                    9 Nov 2020
+                                </div>
+                            </div>
+                            <div class="row question_asked">
+                                <span class="question_headline">
+                                    How to become an UI/UX Designer and get a job in India?
+                                </span>
+                            </div>
+                            <pre class="question_detail">
+To become anything one must have a learning attitude and desire to grow and get
+those constructive criticism which eventually triggers your ego! you need to prepare
+your mindset for things you want to learn and especially you are trying to build a
+career on the same thing! listing few points which will help you to start as a UI/UX
+Designer
+                                
+1. Get Familar to one of the tools i.e Figma, Adobe Xd and Sketch there are many
+more list are endless but i found FIgma much better among them Because it’s easy to
+learn and get adopted evrything has it’s consequences but Figma does most of thing
+you a UX designer does
+                                
+2. Learning UX Principles, Colour Theory ,Typography, Visual hierarchy, UX Methods
+is a must things. everything has it’s own Value and used in most of the cases. there
+is no order to learn them you can go whatever make you curious...
+                                
+3. Ability to understand product/Services is a must if you don’t invest time to
+learn about product for whom it is and who will used it? purpose of using it ? it
+will gonna be hard to design Layouts for any product...
+                                
+4. IN THE END PRATICE PRATICE PRATICE it’s a never ending process you must keep
+learning each and everyday. Product Designer are here to solve the problem and make
+the product useful. not make a beautiful art gallery. Design with Purpose.
+                                                                </pre>
+                            <div class="row tags_used">
+                                <span class="badge">Technology</span>
+                                <span class="badge">Design</span>
+                            </div>
+                            <div class="row upvote_details">
+                                <span>3 Upvotes</span>
+                                <span>3 Downvotes</span>
+                                <span>3 Answers</span>
+                            </div>
+                            <div class="row upvote_buttons">
+                                <span><img src="./assets/up-arrow.png"> Upvote</span>
+                                <span><img src="./assets/down-arrow.png"> Downvote</span>
+                                <span><img src="./assets/chat.png"> Answer</span>
+                            </div>
+                            <div class="row user_answer">
+                                <span><img src="./assets/user_answer.png"></span>
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="exampleFormControlTextarea2" rows="1"
+                                            placeholder="Write Answer as Koshal Bothra"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+
+
             </div>
             <div class="col-2 profilePanel">
                 <span class="image_span"><img src="assets/profile_panel.png"></span>
@@ -427,6 +671,15 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript">
+        textarea1 = document.querySelector("#exampleFormControlTextarea1");
+        textarea1.addEventListener('input', autoResize, false);
+        textarea2 = document.querySelector("#exampleFormControlTextarea2");
+        textarea2.addEventListener('input', autoResize, false);
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }
+
     </script>
 </body>
 
