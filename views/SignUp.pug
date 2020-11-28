@@ -1,0 +1,134 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
+        title SignUp
+        // CSS
+        link(href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet')
+        link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+        link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+        style.
+            .navbar {
+                background-color: #FFFFFF !important;
+                margin: 0 !important;
+            }
+            .btn {
+                background: #FF3C3C;
+                border-radius: 2px !important;
+                font-family: Poppins;
+                font-style: normal;
+                font-size: 18px;
+                line-height: 27px;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                width: 119px;
+                height: 43px;
+            }
+            .btn:hover {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            .navbar-brand {
+                font-family: Merriweather;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 30px;
+                color: #FF3B3B !important;
+            }
+            .mainElem {
+                width: 100%;
+                height: 565px;
+            }
+            .SignUp-photo {
+                background-color: orange;
+                height: 100%;
+                background-image: url(SignUp.jpg);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                margin-left: 2%;
+            }
+            .SignUp-form h4 {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 52px;
+                color: #303030;
+                margin-top: -2%;
+                margin-bottom: 0;
+            }
+            .SignUp-form h6 {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 21px;
+                line-height: 36px;
+                color: #4E4E4E;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+            .SignUp-form {
+                height: 100%;
+            }
+            .SignUp-form .btn {
+                width: 358px;
+                height: 45px;
+                font-family: Poppins;
+                font-style: normal;
+                font-size: 20px;
+                line-height: 30px;
+                color: #FFFFFF;
+                background: #FF3B3B;
+                border-radius: 2px;
+            }
+            .SignUp-form .form-group {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 27px;
+                color: #303030;
+            }
+            .form-control:focus {
+                border-color: #FF3B3B;
+                box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+            }
+    body
+        nav.navbar.navbar-light.bg-light
+            a.navbar-brand(href='#')
+                | Mini-Quora
+            a(href='/api/users/logIn')
+                button.btn(type='button') LOGIN
+        .row.mainElem
+            .col-sm.SignUp-photo
+            .col-sm.SignUp-form
+                h4 Welcome To Mini-Quora
+                h6 Read and share new perspectives on just about any topic.
+                form(method='POST', action='/api/users/signUp')
+                    div.form-group
+                        label Name
+                        input.form-control(,name='name',type='text')
+                    div.form-group
+                        label Email address
+                        input.form-control(name='email',type='email' aria-describedby='emailHelp')
+                    div.form-group
+                        label Date of Birth
+                        br
+                        input.form-control(type='date' name='dob')
+                    div.form-group
+                        label Profession
+                        input.form-control(name='profession',type='text')
+                    div.form-group
+                        label Password
+                        input.form-control(name='password',type='password')
+
+                    button.btn(type='submit') SIGNUP NOW
+
+
+        // Scripts
+        script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
+        script(type='text/javascript').

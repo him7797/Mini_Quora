@@ -7,6 +7,8 @@ const _=require('lodash');
 const multer = require('multer');
 const forgotPassword=require('../models/forgotPassword');
 const msg91=require('../helper/otp');
+const bodyParser = require('body-parser');
+const asyncMiddleware=require('../middleware/async');
 
 const entityStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -22,11 +24,20 @@ const upload = multer({storage: entityStorage});
 
 
 
-Router.post('/signUp',async(req,res)=>{
+Router.get('/signUp', function(req, res){
+    res.render('SignUp');
+});
+
+Router.get('/logIn', function(req, res){
+    res.render('index');
+});
+
+
+Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         let obj={
           name:req.body.name,
           email:req.body.email,
-          phone:req.body.phone
+
         }
         let error=await Validation.validateUser(obj);
         
@@ -44,7 +55,6 @@ Router.post('/signUp',async(req,res)=>{
         let finalObj={
             name:req.body.name,
             email:req.body.email,
-            phone:req.body.phone,
             password:req.body.password,
             about:req.body.profession,
             dob:req.body.dob
@@ -53,12 +63,11 @@ Router.post('/signUp',async(req,res)=>{
         let newUser=new User(finalObj);
         const salt=await bcrypt.genSalt(10);
         newUser.password=await bcrypt.hash(newUser.password,salt);
-        await newUser.save(); 
-        // const token=newUser.generateAuthToken();
-        res.send(_.pick(newUser, ['_id', 'name', 'email']));
-});
+        await newUser.save();
+        res.render('index');
+}));
 
-Router.get('/logIn',async(req,res)=>{
+Router.post('/logIn',asyncMiddleware(async(req,res)=>{
   let email=req.body.email;
   if (email.length<10) res.status(401).json({
     status: "Failed",
@@ -74,16 +83,19 @@ const validPassword=await bcrypt.compare(req.body.password,checkUser.password);
     if(!validPassword) return res.status(400).send('Invalid password');
 
  const token=checkUser.generateAuthToken();
- return res.status(200).json({
-  name: checkUser.name,
-  email:checkUser.email,
-  token:token
- 
-});
-});
+
+//  return res.status(200).json({
+//   name: checkUser.name,
+//   email:checkUser.email,
+//   token:token
+//
+// });
+    res.header('x-auth-token',token).render('home');
+
+}));
 
 
-Router.post('/forgotPas/byPhone',async(req,res)=>{
+Router.post('/forgotPas/byPhone',asyncMiddleware(async(req,res)=>{
       let phone=req.body.phone;
       if(phone.length<10 && phone.length>10)
       {
@@ -123,10 +135,10 @@ Router.post('/forgotPas/byPhone',async(req,res)=>{
         }
       }
 
-});
+}));
 
 
-Router.post('/otp',async(req,res)=>{
+Router.post('/otp',asyncMiddleware(async(req,res)=>{
     let code=req.body.code;
     let phone=req.body.phone;
     let doc=await forgotPassword.findOne({phone:phone,code:code,status:true});
@@ -145,10 +157,10 @@ Router.post('/otp',async(req,res)=>{
     });
     }
 
-});
+}));
 
 
-Router.post('/change-Password-otp',async(req,res)=>{
+Router.post('/change-Password-otp',asyncMiddleware(async(req,res)=>{
       let newPass=req.body.newPass;
       let phone=req.body.phone;
       let code=req.body.code;
@@ -174,10 +186,10 @@ Router.post('/change-Password-otp',async(req,res)=>{
           message: "OTP not verified!"
       });
       }
-});
+}));
 
 
-Router.post('/change-password-email',async(req,res)=>{
+Router.post('/change-password-email',asyncMiddleware(async(req,res)=>{
     let email=req.body.email;
     let oldPas=req.body.oldPas;
     let newPas=req.body.newPas;
@@ -203,9 +215,9 @@ Router.post('/change-password-email',async(req,res)=>{
       status: "Failed",
       message: "User with given Email not found."
   });
-});
+}));
 
-Router.post('/change/ProfilePic',upload.single('photo'),async(req,res)=>{
+Router.post('/change/ProfilePic',upload.single('photo'),asyncMiddleware(async(req,res)=>{
       let email=req.body.email;
       let userInfo=await User.findOne({email:email});
       if(userInfo)
@@ -219,7 +231,7 @@ Router.post('/change/ProfilePic',upload.single('photo'),async(req,res)=>{
         status: "Failed",
         message: "User with given Email not found."
     });
-});
+}));
 
 // Router.post('/update/userInfo/:id',async(req,res)=>{
 //      let _id=re.params._id;

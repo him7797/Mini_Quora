@@ -20,7 +20,7 @@ const User = mongoose.Schema({
     },
     phone: {
       type: String,
-      required: true,
+
       minlength: 10,
       maxlength: 10
     },
@@ -51,7 +51,10 @@ const User = mongoose.Schema({
       answerId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Answers'
-      }
+      },
+        createdAt: {
+          type:Date
+        }
     }],
     bookmark:{
         type:Array

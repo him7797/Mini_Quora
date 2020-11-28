@@ -4,6 +4,7 @@ const multer=require('multer');
 const Category=require('../models/category');
 const Post=require('../models/post');
 const User=require('../models/user');
+const asyncMiddleware=require('../middleware/async');
 const entityStorage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'catUploads/');// check for correct permission
@@ -16,7 +17,7 @@ const entityStorage = multer.diskStorage({
   
   const upload = multer({storage: entityStorage});
 
-Router.post('/',upload.single('photo'),async(req,res)=>{
+Router.post('/',upload.single('photo'),asyncMiddleware(async(req,res)=>{
     let title=req.body.title;
     let description=req.body.description;
     let obj={
@@ -27,9 +28,9 @@ Router.post('/',upload.single('photo'),async(req,res)=>{
   let newCat=new Category(obj);
   let result=await newCat.save();
   res.send(result);
-});
+}));
 
-Router.get('/by/:id',async(req,res)=>{
+Router.get('/by/:id',asyncMiddleware(async(req,res)=>{
     let cat=await Category.findById(req.params.id);
     let catTitle=cat.title;
     let posts=await Post.find({tags:{$all:[`${catTitle}`]}}).sort({updatedAt:-1});
@@ -42,9 +43,9 @@ Router.get('/by/:id',async(req,res)=>{
         questions:posts
     }
     res.send(obj);
-});
+}));
 
-Router.post('/follow/:id',async(req,res)=>{
+Router.post('/follow/:id',asyncMiddleware(async(req,res)=>{
     let cat=await Category.findById(req.params.id);
     let followCount=cat.followersCount+1;
     cat.followersCount=followCount;
@@ -54,12 +55,14 @@ Router.post('/follow/:id',async(req,res)=>{
     await User.updateOne({_id:userInfo},{$push:{following:cat.title}});
     res.send('Success');
 
-});
+}));
 
-Router.get('/:id',async(req,res)=>{
+Router.get('/:id',asyncMiddleware(async(req,res)=>{
     let userInfo=await Post.findById(req.params.id);
     const Path="F:\MiniQuora\Mini_Quora";
     let filepath=path+userInfo.photo;
     res.sendFile(filepath);
-})
+}));
+
+
 module.exports=Router;

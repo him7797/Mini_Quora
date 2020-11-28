@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-// const jwt=require('jsonwebtoken');
-// const config=require('config');
+
 
 
 const Answers = mongoose.Schema({
@@ -31,7 +30,7 @@ const Answers = mongoose.Schema({
           ref: 'User'
         },
         createdAt:{
-          type:Number
+          type:Date
         }
       }],
     disLikeBy:[{
@@ -40,7 +39,7 @@ const Answers = mongoose.Schema({
           ref: 'User'
         },
         createdAt:{
-          type:Number
+          type:Date
         }
       }]
     
