@@ -29,7 +29,7 @@ Router.get('/signUp', function(req, res){
 });
 
 Router.get('/logIn', function(req, res){
-    res.render('index');
+    res.render('logIn');
 });
 
 
@@ -64,7 +64,7 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         const salt=await bcrypt.genSalt(10);
         newUser.password=await bcrypt.hash(newUser.password,salt);
         await newUser.save();
-        res.render('index');
+        res.render('logIn');
 }));
 
 Router.post('/logIn',asyncMiddleware(async(req,res)=>{
@@ -90,7 +90,7 @@ const validPassword=await bcrypt.compare(req.body.password,checkUser.password);
 //   token:token
 //
 // });
-    res.header('x-auth-token',token).render('home');
+    res.header('x-auth-token',token).redirect('/api/home');
 
 }));
 

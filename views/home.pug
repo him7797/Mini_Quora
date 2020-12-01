@@ -428,7 +428,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='Homepage.html') Home
+                    a.active(href='/api/home') Home
                     a(href='') Following
                     a(href='') Notifications
                 .col-2
@@ -439,24 +439,25 @@ html(lang='en')
                 .col-2.sidePanel
                     ul
                         li
-                            img(src='assets/bullet.png')
+                            img(src='/assets/bullet.png')
                             |  Education
                         li
-                            img(src='assets/bullet.png')
+                            img(src='/assets/bullet.png')
                             |  Sports
                         li
-                            img(src='assets/bullet.png')
+                            img(src='/assets/bullet.png')
                             |  Technology
                         li
-                            img(src='assets/bullet.png')
+                            img(src='/assets/bullet.png')
                             |  Entertainment
                 .col-8.mainPanel
                     .row.question_panel
                         .card.question_card
                             .row.card-body
                                 .col-2.profile_image
-                                    img(src='assets/profile.png')
+                                    img(src='/assets/profile.png')
                                 .col-10.profile_name
+                                    form(method='POST', action='/api/users/signUp')
                                     .form-group
                                         label(for='exampleFormControlTextarea1') Koshal Bothra
                                         textarea#exampleFormControlTextarea1.form-control(rows='3' placeholder='Ask any questions running in your mind')
@@ -465,10 +466,10 @@ html(lang='en')
                                     button.btn.post_button(type='button') POST QUESTIONS
                                 .image_buttons
                                     span
-                                        img(src='assets/photo.png')
+                                        img(src='/assets/photo.png')
                                         | Photos
                                     span
-                                        img(src='assets/video.png')
+                                        img(src='/assets/video.png')
                                         | Videos
                                     span
                                         img(src='assets/doc.png')
@@ -515,17 +516,17 @@ html(lang='en')
                                     span 3 Answers
                                 .row.upvote_buttons
                                     span
-                                        img(src='./assets/up-arrow.png')
+                                        img(src='/assets/up-arrow.png')
                                         |  Upvote
                                     span
-                                        img(src='./assets/down-arrow.png')
+                                        img(src='/assets/down-arrow.png')
                                         |  Downvote
                                     span
-                                        img(src='./assets/chat.png')
+                                        img(src='/assets/chat.png')
                                         |  Answer
                                 .row.user_answer
                                     span
-                                        img(src='./assets/user_answer.png')
+                                        img(src='/assets/user_answer.png')
                                     .col-10
                                         .form-group
                                             textarea#exampleFormControlTextarea2.form-control(rows='1' placeholder='Write Answer as Koshal Bothra')
