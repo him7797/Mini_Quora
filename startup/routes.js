@@ -1,4 +1,3 @@
-const express=require('express');
 const home=require('../routes/home');
 const user=require('../routes/users');
 const answer=require('../routes/answers');

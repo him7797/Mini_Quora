@@ -439,25 +439,24 @@ html(lang='en')
                 .col-2.sidePanel
                     ul
                         li
-                            img(src='/assets/bullet.png')
+                            img(src='/public/bullet.png')
                             |  Education
                         li
-                            img(src='/assets/bullet.png')
+                            img(src='/public/bullet.png')
                             |  Sports
                         li
-                            img(src='/assets/bullet.png')
+                            img(src='/public/bullet.png')
                             |  Technology
                         li
-                            img(src='/assets/bullet.png')
+                            img(src='/public/bullet.png')
                             |  Entertainment
                 .col-8.mainPanel
                     .row.question_panel
                         .card.question_card
                             .row.card-body
                                 .col-2.profile_image
-                                    img(src='/assets/profile.png')
+                                    img(src='/public/profile.png')
                                 .col-10.profile_name
-                                    form(method='POST', action='/api/users/signUp')
                                     .form-group
                                         label(for='exampleFormControlTextarea1') Koshal Bothra
                                         textarea#exampleFormControlTextarea1.form-control(rows='3' placeholder='Ask any questions running in your mind')
@@ -466,20 +465,20 @@ html(lang='en')
                                     button.btn.post_button(type='button') POST QUESTIONS
                                 .image_buttons
                                     span
-                                        img(src='/assets/photo.png')
+                                        img(src='/public/photo.png')
                                         | Photos
                                     span
-                                        img(src='/assets/video.png')
+                                        img(src='/public/video.png')
                                         | Videos
                                     span
-                                        img(src='assets/doc.png')
+                                        img(src='/public/doc.png')
                                         | Documents
                     .row.answer_panel
                         .card.answer_card
                             .card-body
                                 .row.user_details
                                     .col-1.answer_image
-                                        img(src='assets/answer_photo.png')
+                                        img(src='/public/answer_photo.png')
                                     .col-9.answer_name
                                         span.asked_by Nitin Momaya
                                         span.profession UX Designer
@@ -516,23 +515,23 @@ html(lang='en')
                                     span 3 Answers
                                 .row.upvote_buttons
                                     span
-                                        img(src='/assets/up-arrow.png')
+                                        img(src='/public/up-arrow.png')
                                         |  Upvote
                                     span
-                                        img(src='/assets/down-arrow.png')
+                                        img(src='/public/down-arrow.png')
                                         |  Downvote
                                     span
-                                        img(src='/assets/chat.png')
+                                        img(src='/public/chat.png')
                                         |  Answer
                                 .row.user_answer
                                     span
-                                        img(src='/assets/user_answer.png')
+                                        img(src='/public/user_answer.png')
                                     .col-10
                                         .form-group
                                             textarea#exampleFormControlTextarea2.form-control(rows='1' placeholder='Write Answer as Koshal Bothra')
                 .col-2.profilePanel
                     span.image_span
-                        img(src='assets/profile_panel.png')
+                        img(src='/public/profile_panel.png')
                     span.profilename_span
                         a(href='') Koshal Bothra
                     span.detail_span
