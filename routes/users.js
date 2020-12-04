@@ -6,11 +6,10 @@ const Post=require('../models/post');
 const bcrypt=require('bcrypt');
 const _=require('lodash');
 const multer = require('multer');
-const forgotPassword=require('../models/forgotPassword');
-const msg91=require('../helper/otp');
 const Config=require('../config/config');
 const asyncMiddleware=require('../middleware/async');
 const jwt=require('jsonwebtoken');
+const localstorage=require('localStorage');
 const auth=require('../middleware/auth');
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -38,8 +37,10 @@ Router.get('/logIn', function(req, res){
     res.render('logIn');
 });
 
-Router.get('/:token',auth,asyncMiddleware(async(req,res)=>{
+Router.get('/',auth,asyncMiddleware(async(req,res)=>{
     let pageNo = req.query.pageNo;
+    const user=req.userData;
+    console.log(user);
     let limit = 10;
     let skipPosts = (pageNo-1)*limit;
     let posts=await Post.find({status:true}).sort({updatedAt:-1}).skip(skipPosts).limit(limit)
@@ -86,15 +87,9 @@ Router.get('/:token',auth,asyncMiddleware(async(req,res)=>{
             allPosts.push(obj);
         }
     }
-
-    // res.render('home',{
-    //     data:allPosts
-    // });
-    // const token=req.header('x-auth-token');
-    // console.log(token);
-    // res.send(token);
-    res.render('home');
-
+res.render('home',{
+    posts:allPosts
+})
 
 }));
 Router.post('/signUp',asyncMiddleware(async(req,res)=>{
@@ -156,108 +151,105 @@ const validPassword=await bcrypt.compare(req.body.password,checkUser.password);
             expiresIn: Config.jwtExpiresIn
         }
     )
+    localstorage.setItem('token',token);
+    res.redirect('/api/users');
+}));
 
-// console.log(res.header('auth-token',token));
-res.render('webToken',{
-    token:token
+Router.get('/logout',async(req,res)=>{
+    localstorage.clear();
+    res.render('logIn');
 });
-
-//     console.log(res.header('x-auth-token',token));
-
-}));
-
-
-Router.post('/forgotPas/byPhone',asyncMiddleware(async(req,res)=>{
-      let phone=req.body.phone;
-      if(phone.length<10 && phone.length>10)
-      {
-        return res.status(401).json({
-          status: "Failed",
-          message: "Phone number invalid"
-        });
-      }
-      let userInfo=await User.findOne({phone:phone});
-      if(userInfo)
-      {
-        let code=Math.floor(1000 + Math.random() * 9000);
-        const newForPas=new forgotPassword({
-          user:userInfo._id,
-          phone:userInfo.phone,
-          code:code
-        });
-        await newForPas.save();
-        await forgotPassword.updateOne({_id:newForPas._id},{$set:{status:true}});
-        let Send=await msg91.sendOTP(code,phone);
-        if(Send.type!="success")
-        {
-          return res.status(401).json({
-            status: "Failed",
-            message: "Code Not Sent",
-            name: userInfo.name,
-           
-        });
-        }
-        else{
-          return res.status(200).json({
-            status: "Success",
-            message: "Code Sent",
-            name: userInfo.name,
-            body:Send
-        });
-        }
-      }
-
-}));
-
-Router.post('/otp',asyncMiddleware(async(req,res)=>{
-    let code=req.body.code;
-    let phone=req.body.phone;
-    let doc=await forgotPassword.findOne({phone:phone,code:code,status:true});
-    if(doc)
-    {
-      await forgotPassword.updateOne({phone:phone,status:true},{$set:{status:false}});
-      return res.status(200).json({
-        status: "Success",
-        message: "Otp Verified!"
-    });
-    }
-    else{
-      return res.status(401).json({
-        status: "Failed",
-        message: "Otp Not Verified!"
-    });
-    }
-
-}));
-
-
-Router.post('/change-Password-otp',asyncMiddleware(async(req,res)=>{
-      let newPass=req.body.newPass;
-      let phone=req.body.phone;
-      let code=req.body.code;
-      let checPass=await Validation.validatePassword(newPass);
-        if(checPass==false)
-        {
-          res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
-        }
-      let doc=await forgotPassword.findOne({code:code,status:false,phone:phone});
-      if(doc)
-      {
-        const salt=await bcrypt.genSalt(10);
-        newPass=await bcrypt.hash(newPass,salt);
-        let result=await User.updateOne({phone:phone},{$set:{password:newPass}});
-        return res.status(200).json({
-          status: "Success",
-          message: "Password Successfully Changed!"
-      });
-      }
-      else{
-        return res.status(401).json({
-          status: "Failed",
-          message: "OTP not verified!"
-      });
-      }
-}));
+// Router.post('/forgotPas/byPhone',asyncMiddleware(async(req,res)=>{
+//       let phone=req.body.phone;
+//       if(phone.length<10 && phone.length>10)
+//       {
+//         return res.status(401).json({
+//           status: "Failed",
+//           message: "Phone number invalid"
+//         });
+//       }
+//       let userInfo=await User.findOne({phone:phone});
+//       if(userInfo)
+//       {
+//         let code=Math.floor(1000 + Math.random() * 9000);
+//         const newForPas=new forgotPassword({
+//           user:userInfo._id,
+//           phone:userInfo.phone,
+//           code:code
+//         });
+//         await newForPas.save();
+//         await forgotPassword.updateOne({_id:newForPas._id},{$set:{status:true}});
+//         let Send=await msg91.sendOTP(code,phone);
+//         if(Send.type!="success")
+//         {
+//           return res.status(401).json({
+//             status: "Failed",
+//             message: "Code Not Sent",
+//             name: userInfo.name,
+//
+//         });
+//         }
+//         else{
+//           return res.status(200).json({
+//             status: "Success",
+//             message: "Code Sent",
+//             name: userInfo.name,
+//             body:Send
+//         });
+//         }
+//       }
+//
+// }));
+//
+// Router.post('/otp',asyncMiddleware(async(req,res)=>{
+//     let code=req.body.code;
+//     let phone=req.body.phone;
+//     let doc=await forgotPassword.findOne({phone:phone,code:code,status:true});
+//     if(doc)
+//     {
+//       await forgotPassword.updateOne({phone:phone,status:true},{$set:{status:false}});
+//       return res.status(200).json({
+//         status: "Success",
+//         message: "Otp Verified!"
+//     });
+//     }
+//     else{
+//       return res.status(401).json({
+//         status: "Failed",
+//         message: "Otp Not Verified!"
+//     });
+//     }
+//
+// }));
+//
+//
+// Router.post('/change-Password-otp',asyncMiddleware(async(req,res)=>{
+//       let newPass=req.body.newPass;
+//       let phone=req.body.phone;
+//       let code=req.body.code;
+//       let checPass=await Validation.validatePassword(newPass);
+//         if(checPass==false)
+//         {
+//           res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
+//         }
+//       let doc=await forgotPassword.findOne({code:code,status:false,phone:phone});
+//       if(doc)
+//       {
+//         const salt=await bcrypt.genSalt(10);
+//         newPass=await bcrypt.hash(newPass,salt);
+//         let result=await User.updateOne({phone:phone},{$set:{password:newPass}});
+//         return res.status(200).json({
+//           status: "Success",
+//           message: "Password Successfully Changed!"
+//       });
+//       }
+//       else{
+//         return res.status(401).json({
+//           status: "Failed",
+//           message: "OTP not verified!"
+//       });
+//       }
+// }));
 
 
 Router.post('/change-password-email',asyncMiddleware(async(req,res)=>{

@@ -2,36 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73c17bdc-f38b-4dbf-ae5e-a9ebdfbb3792" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Mini_Quora.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Mini_Quora.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SignUp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/SignUp.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/answer_photo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/bullet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/chat.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/doc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/down-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/editProfile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/photo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/profile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/profile_panel.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/up-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/user_answer.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/video.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/custom-environment-variables.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/custom-environment-variables.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/otp.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/otp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startup/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/startup/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startup/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/startup/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/SignUp.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/SignUp.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/SignUp.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/logIn.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/logIn.pug" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +84,7 @@
       <workItem from="1606846543241" duration="7400000" />
       <workItem from="1606909958957" duration="6717000" />
       <workItem from="1606928348021" duration="2103000" />
-      <workItem from="1607003044061" duration="1129000" />
+      <workItem from="1607003044061" duration="10394000" />
     </task>
     <servers />
   </component>
@@ -132,21 +108,21 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1606916937347" />
-    <state width="1323" height="191" key="GridCell.Tab.0.bottom" timestamp="1606924485431">
+    <state width="1323" height="191" key="GridCell.Tab.0.bottom" timestamp="1607061381103">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1606924485431" />
-    <state width="1323" height="191" key="GridCell.Tab.0.center" timestamp="1606924485431">
+    <state width="1323" height="191" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
+    <state width="1323" height="191" key="GridCell.Tab.0.center" timestamp="1607061381103">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1606924485431" />
-    <state width="1323" height="191" key="GridCell.Tab.0.left" timestamp="1606924485431">
+    <state width="1323" height="191" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
+    <state width="1323" height="191" key="GridCell.Tab.0.left" timestamp="1607061381103">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1606924485431" />
-    <state width="1323" height="191" key="GridCell.Tab.0.right" timestamp="1606924485431">
+    <state width="1323" height="191" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
+    <state width="1323" height="191" key="GridCell.Tab.0.right" timestamp="1607061381103">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1606924485431" />
+    <state width="1323" height="191" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
   </component>
 </project>
