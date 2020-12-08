@@ -1,4 +1,3 @@
-const home=require('../routes/home');
 const user=require('../routes/users');
 const answer=require('../routes/answers');
 const posts=require('../routes/posts');
@@ -11,12 +10,8 @@ module.exports=function(app){
     app.use('/api/users',user);
     app.use('/api/posts',posts);
     app.use('/api/answers',answer);
-    app.use('/api/home',home);
     app.use('/api/category',category);
 
-    
-    
-   
 }
 
 

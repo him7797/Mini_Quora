@@ -4,27 +4,24 @@ const multer = require('multer');
 const Post=require('../models/post');
 const User=require('../models/user');
 const asyncMiddleware=require('../middleware/async');
-// const bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded({ extended: false }));
-// // parse application/json
-// app.use(bodyParser.json());
-
-
-const entityStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'PostsUploads/');// check for correct permission
-    },
-    filename: (req, file, cb) => {
-      const name = 'file-' + Date.now() + '-' + file.originalname;
-      cb(null,  name);
-    }
-  });
-  
-  const upload = multer({storage: entityStorage});
 
 
 
-Router.post('/',upload.single('photo'),asyncMiddleware(async(req,res)=>{
+// const entityStorage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, 'PostsUploads/');// check for correct permission
+//     },
+//     filename: (req, file, cb) => {
+//       const name = 'file-' + Date.now() + '-' + file.originalname;
+//       cb(null,  name);
+//     }
+//   });
+//
+//   const upload = multer({storage: entityStorage});
+
+
+
+Router.post('/',asyncMiddleware(async(req,res)=>{
    let title=req.body.title;
    let tags=req.body.tags;
    let postBy=req.body.postBy;
@@ -33,7 +30,6 @@ Router.post('/',upload.single('photo'),asyncMiddleware(async(req,res)=>{
        title:title,
        tags:tags,
        postBy:postBy,
-       photo:req.file.path
    }
 
    let doc=new Post(obj);
@@ -47,7 +43,7 @@ Router.post('/',upload.single('photo'),asyncMiddleware(async(req,res)=>{
       {
         interests:tags
       }
-    }
+    };
    await User.updateOne({_id:postBy},updateDoc);
    res.send(result);
 }));

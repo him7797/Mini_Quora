@@ -1,14 +1,12 @@
 const jwt=require('jsonwebtoken');
 const Config=require('../config/config');
-const localstorage=require('localStorage');
+const localstorage=require('local-storage');
 module.exports=function (req,res,next){
-    const token =localstorage.getItem('token');
+    const token =localstorage.get('token');
 
-    if(!token) return res.status(401).send('Access denied no token provided');
+    if(!token) return res.status(401).send('Access denied no token provided Please login to continue');
     try{
         req.userData = jwt.verify(token, Config.JWT_KEY);
-
-        console.log( req.userData);
         next();
     }
     catch(error){
@@ -17,5 +15,4 @@ module.exports=function (req,res,next){
             message: 'Please login to continue'
         });
     }
-    
 }

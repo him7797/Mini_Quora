@@ -2,12 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73c17bdc-f38b-4dbf-ae5e-a9ebdfbb3792" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/otp.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/otp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605809791128-Nitin.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605810003888-Nitin.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605810099308-Nitin.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605810129751-Nitin.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605810557708-IMG_0148.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605810711066-DSC_0135.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605899244525-67292659_2563460457048161_526226355247906816_n.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PostsUploads/file-1605899450936-67311144_2563460243714849_3859395025922162688_n.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/catUploads/file-1605966788836-67311144_2563460243714849_3859395025922162688_n.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/localStorage/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/localStorage/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/localStorage/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/localStorage/lib/localStorage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/localStorage/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/localStorage/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/localStorage/tests/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/node-localstorage/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/node-localstorage/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/posts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/startup/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/startup/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validations/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/validations/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Profile.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/Profile.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/SignUp.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/SignUp.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/logIn.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/logIn.pug" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +59,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.15.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Shopay/harbor" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -39,6 +69,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -84,7 +115,15 @@
       <workItem from="1606846543241" duration="7400000" />
       <workItem from="1606909958957" duration="6717000" />
       <workItem from="1606928348021" duration="2103000" />
-      <workItem from="1607003044061" duration="10394000" />
+      <workItem from="1607003044061" duration="12705000" />
+      <workItem from="1607075991716" duration="5536000" />
+      <workItem from="1607086721634" duration="14683000" />
+      <workItem from="1607150600817" duration="12318000" />
+      <workItem from="1607174687503" duration="5754000" />
+      <workItem from="1607219332454" duration="16747000" />
+      <workItem from="1607321210040" duration="580000" />
+      <workItem from="1607347608275" duration="4412000" />
+      <workItem from="1607393100556" duration="13115000" />
     </task>
     <servers />
   </component>
@@ -104,25 +143,29 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="352" y="147" key="EditFileWatcherDialog/0.0.1366.738@0.0.1366.738" timestamp="1606396184406" />
-    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1606916937347">
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1607428130134">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1606916937347" />
-    <state width="1323" height="191" key="GridCell.Tab.0.bottom" timestamp="1607061381103">
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1607428130134" />
+    <state width="1323" height="91" key="GridCell.Tab.0.bottom" timestamp="1607425242023">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
-    <state width="1323" height="191" key="GridCell.Tab.0.center" timestamp="1607061381103">
+    <state width="1323" height="91" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1607425242023" />
+    <state width="1323" height="91" key="GridCell.Tab.0.center" timestamp="1607425242022">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
-    <state width="1323" height="191" key="GridCell.Tab.0.left" timestamp="1607061381103">
+    <state width="1323" height="91" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1607425242022" />
+    <state width="1323" height="91" key="GridCell.Tab.0.left" timestamp="1607425242022">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
-    <state width="1323" height="191" key="GridCell.Tab.0.right" timestamp="1607061381103">
+    <state width="1323" height="91" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1607425242022" />
+    <state width="1323" height="91" key="GridCell.Tab.0.right" timestamp="1607425242022">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="191" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607061381103" />
+    <state width="1323" height="91" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1607425242022" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607093697489">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607093697489" />
   </component>
 </project>

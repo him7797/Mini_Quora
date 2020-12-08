@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const jwt=require('jsonwebtoken');
-const config=require('config');
 
 
 const User = mongoose.Schema({
@@ -16,11 +14,9 @@ const User = mongoose.Schema({
     password: {
       type: String,
       required:true,
-      
     },
     phone: {
       type: String,
-
       minlength: 10,
       maxlength: 10
     },
@@ -45,7 +41,6 @@ const User = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Posts'
       },
-
     }],
     answers:[{
       answerId:{
@@ -59,18 +54,18 @@ const User = mongoose.Schema({
     bookmark:{
         type:Array
     },
-    following:{
-      type:Array
-    }
+    following:[{
+        followingId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Category'
+        }
+    }]
   },{timestamps: true});
 
-  User.methods.generateAuthToken=function(){
-    const token=jwt.sign({_id:this._id},config.get('saviour'));
-    return token;
-  }
 
 
 
 
 
-  module.exports = mongoose.model('User', User);
+
+module.exports = mongoose.model('User', User);

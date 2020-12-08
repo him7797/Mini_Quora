@@ -4,23 +4,23 @@ const Validation=require('../validations/user');
 const User=require('../models/user');
 const Post=require('../models/post');
 const bcrypt=require('bcrypt');
-const _=require('lodash');
 const multer = require('multer');
 const Config=require('../config/config');
 const asyncMiddleware=require('../middleware/async');
 const jwt=require('jsonwebtoken');
-const localstorage=require('localStorage');
+const localstorage=require('local-storage');
 const auth=require('../middleware/auth');
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 
+//Setting up multer for photo upload
 const entityStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');// check for correct permission
+    cb(null, 'public/');// check for correct permission
   },
   filename: (req, file, cb) => {
-    const name = 'file-' + Date.now() + '-' + file.originalname;
+    const name = file.originalname;
     cb(null,  name);
   }
 });
@@ -28,27 +28,27 @@ const entityStorage = multer.diskStorage({
 const upload = multer({storage: entityStorage});
 
 
-
-Router.get('/signUp', function(req, res){
+//Rendering the Signup page
+Router.get('/signUp', asyncMiddleware(function(req, res){
     res.render('SignUp');
-});
+}));
 
-Router.get('/logIn', function(req, res){
+//Rendering the Login Page
+Router.get('/logIn', asyncMiddleware(function(req, res){
     res.render('logIn');
-});
+}));
 
+//Rendering and sending the Home page
 Router.get('/',auth,asyncMiddleware(async(req,res)=>{
     let pageNo = req.query.pageNo;
-    const user=req.userData;
-    console.log(user);
+    let user=await User.findById(req.userData.id);
     let limit = 10;
     let skipPosts = (pageNo-1)*limit;
     let posts=await Post.find({status:true}).sort({updatedAt:-1}).skip(skipPosts).limit(limit)
         .populate('postBy')
         .populate('answers.answerId');
     let allPosts=[];
-
-
+    let totalTags=[];
     for(let i in posts) {
         if (posts[i].answers.length > 0) {
             let name = await User.findById(posts[i].answers[0].answerId.createdBy);
@@ -59,6 +59,7 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
                 totalanswers: posts[i].totalAnswers,
                 tags: posts[i].tags,
                 postBy: posts[i].postBy.name,
+                postByPhoto:posts[i].postBy.photo,
                 profession: posts[i].postBy.about,
                 photo: posts[i].photo,
                 totalLikes: posts[i].answers[0].answerId.totalLikes,
@@ -70,6 +71,7 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
                 userPhoto: posts[i].postBy.photo,
             };
             allPosts.push(obj);
+            totalTags.push(posts[i].tags);
         } else {
             let obj;
             obj = {
@@ -82,16 +84,37 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
                 year: posts[i].createdAt.getFullYear(),
                 month: monthNames[posts[i].createdAt.getMonth()],
                 date: posts[i].createdAt.getDate(),
-                userPhoto: posts[i].postBy.photo
+                userPhoto: posts[i].postBy.photo,
             };
             allPosts.push(obj);
+            totalTags.push(posts[i].tags);
         }
     }
+     user={
+        currentUser:user.name,
+        currentUserPhoto:user.photo,
+        id: req.userData.id
+    }
+    totalTags.push(user.interests);
+    let newTag=[];
+    for(let i in totalTags)
+    {
+        for(let j in totalTags[i])
+        {
+            newTag.push(totalTags[i][j]);
+        }
+    }
+    const unique=Array.from(new Set(newTag));
+    console.log(unique);
 res.render('home',{
-    posts:allPosts
-})
+    posts:allPosts,
+    userInfo:user,
+    tags:unique
+});
 
 }));
+
+//Sign Up Route
 Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         let obj={
           name:req.body.name,
@@ -100,24 +123,23 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         }
         let error=await Validation.validateUser(obj);
         
-        if (error.isJoi) res.status(401).json({
+        if (error.isJoi) return res.status(401).json({
             status: "Failed",
             message: error.details[0].message
         });
         let checPass=await Validation.validatePassword(req.body.password);
         if(checPass==false)
         {
-          res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
+          return res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
         }
         let checkEUser=await User.findOne({email:req.body.email});
-        if(checkEUser) res.status(401).json({status:'Failed',message:'User is already registered!'});
+        if(checkEUser) return res.status(401).json({status:'Failed',message:'User is already registered!'});
         let finalObj={
             name:req.body.name,
             email:req.body.email,
             password:req.body.password,
             about:req.body.profession,
             dob:req.body.dob
-            
         }
         let newUser=new User(finalObj);
         const salt=await bcrypt.genSalt(10);
@@ -126,14 +148,16 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         res.render('logIn');
 }));
 
+
+//Login Route
 Router.post('/logIn',asyncMiddleware(async(req,res)=>{
   let email=req.body.email;
-  if (email.length<10) res.status(401).json({
+  if (email.length<5) return res.status(401).json({
     status: "Failed",
     message: "Length is less than 10"
 });
 let checkUser=await User.findOne({email:email});
-if(!checkUser) res.status(401).json({
+if(!checkUser) return res.status(401).json({
   status: "Failed",
   message: "User not found"
 });
@@ -151,14 +175,105 @@ const validPassword=await bcrypt.compare(req.body.password,checkUser.password);
             expiresIn: Config.jwtExpiresIn
         }
     )
-    localstorage.setItem('token',token);
+    localstorage.set('token',token);
     res.redirect('/api/users');
 }));
 
-Router.get('/logout',async(req,res)=>{
+//Logout Route
+Router.get('/logout',asyncMiddleware(async(req,res)=>{
     localstorage.clear();
     res.render('logIn');
-});
+}));
+
+Router.get('/change/profilePic',asyncMiddleware(async(req,res)=>{
+    res.render('uploadProfilePic');
+}))
+
+//change password using email route
+Router.post('/change-password-email',auth,asyncMiddleware(async(req,res)=>{
+    let oldPas=req.body.oldPas;
+    let newPas=req.body.newPas;
+    let email=req.userData;
+    email=email.email;
+    let checkPass=await Validation.validatePassword(newPas);
+    if(checkPass==false)
+    {
+        res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
+    }
+    let doc=await User.findOne({email:email});
+    if(doc)
+    {
+        const validPassword=await bcrypt.compare(oldPas,doc.password);
+        if(!validPassword) return res.status(400).send('Wrong password');
+        const salt=await bcrypt.genSalt(10);
+        newPas=await bcrypt.hash(newPas,salt);
+        let newDoc={
+            $set:{
+                password:newPas,
+                about:req.body.profession
+            }
+        }
+        await User.updateOne({email:email},newDoc);
+        localstorage.clear();
+        res.render('logIn');
+    }
+    return res.status(401).json({
+        status: "Failed",
+        message: "User with given Email not found."
+    });
+}));
+
+//Changing profile pic
+Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(async(req,res)=>{
+    let email=req.userData.email;
+    // let userInfo=req.body.email;
+    let id=req.userData.id;
+    let user=await User.findById(id);
+    let path=req.file.path;
+    path=path.replace(/\\/g,"/");
+    let imageName=path.slice(7);
+
+
+    let imageFullPath=await Validation.manipulateImage(path,imageName);
+
+    if(email)
+    {
+        await User.updateOne({email:email},{$set:{photo:imageFullPath}});
+        let UserInfo={
+            userName:user.name,
+            userEmail:user.email,
+            userDob:user.dob,
+            userProfession:user.about,
+            userPhoto:imageFullPath,
+            userPassword:user.password
+
+        };
+        res.render('Profile',{
+            userInfo:UserInfo
+        });
+    }
+    return res.status(401).json({
+
+    });
+}));
+
+Router.get('/:id',asyncMiddleware(async(req,res)=>{
+    let user=await User.findById(req.params.id);
+
+    let UserInfo={
+        userName:user.name,
+        userEmail:user.email,
+        userDob:user.dob,
+        userProfession:user.about,
+        userPhoto:user.photo,
+        userPassword:user.password
+
+    };
+    res.render('Profile',{
+        userInfo:UserInfo
+    })
+}));
+
 // Router.post('/forgotPas/byPhone',asyncMiddleware(async(req,res)=>{
 //       let phone=req.body.phone;
 //       if(phone.length<10 && phone.length>10)
@@ -252,49 +367,7 @@ Router.get('/logout',async(req,res)=>{
 // }));
 
 
-Router.post('/change-password-email',asyncMiddleware(async(req,res)=>{
-    let email=req.body.email;
-    let oldPas=req.body.oldPas;
-    let newPas=req.body.newPas;
-    let checPass=await Validation.validatePassword(newPass);
-      if(checPass==false)
-      {
-          res.status(401).json({status:'Failed',message:'Invalid Password Entry! Retry'});
-      }
-    let doc=await User.findOne({email:email});
-    if(doc)
-    {
-      const validPassword=await bcrypt.compare(oldPas,doc.password);
-      if(!validPassword) return res.status(400).send('Invalid password');
-      const salt=await bcrypt.genSalt(10);
-      newPass=await bcrypt.hash(newPass,salt);
-      await User.updateOne({email:email},{$set:{password:newPas}}); 
-      return res.status(200).json({
-        status: "Success",
-        message: " Password Successfully Changed!"
-    });
-    }
-    return res.status(401).json({
-      status: "Failed",
-      message: "User with given Email not found."
-  });
-}));
 
-Router.post('/change/ProfilePic',upload.single('photo'),asyncMiddleware(async(req,res)=>{
-      let email=req.body.email;
-      let userInfo=await User.findOne({email:email});
-      if(userInfo)
-      {
-        await User.updateOne({email:email},{$set:{photo:req.file.path}});
-        return res.status(200).json({
-          message: " Profile Picture Successfully Changed!"
-      });
-      }
-      return res.status(401).json({
-        status: "Failed",
-        message: "User with given Email not found."
-    });
-}));
 
 // Router.post('/update/userInfo/:id',async(req,res)=>{
 //      let _id=re.params._id;

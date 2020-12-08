@@ -5,54 +5,62 @@ const Category=require('../models/category');
 const Post=require('../models/post');
 const User=require('../models/user');
 const asyncMiddleware=require('../middleware/async');
-const entityStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'catUploads/');// check for correct permission
-    },
-    filename: (req, file, cb) => {
-      const name = 'file-' + Date.now() + '-' + file.originalname;
-      cb(null,  name);
-    }
-  });
-  
-  const upload = multer({storage: entityStorage});
+const auth=require('../middleware/auth');
 
-Router.post('/',upload.single('photo'),asyncMiddleware(async(req,res)=>{
+// const entityStorage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, 'catUploads/');// check for correct permission
+//     },
+//     filename: (req, file, cb) => {
+//       const name = 'file-' + Date.now() + '-' + file.originalname;
+//       cb(null,  name);
+//     }
+//   });
+//
+//   const upload = multer({storage: entityStorage});
+
+Router.post('/',asyncMiddleware(async(req,res)=>{
     let title=req.body.title;
+    let catInfo=await Category.find({title:title});
+    if(catInfo.length>0)
+    {
+        return res.status(409).json({
+            status: "Failed",
+            message: "Title is already available."
+        });
+    }
     let description=req.body.description;
     let obj={
         title:title,
         description:description,
-        photo:req.file.path
     };
   let newCat=new Category(obj);
   let result=await newCat.save();
   res.send(result);
 }));
 
-Router.get('/by/:id',asyncMiddleware(async(req,res)=>{
-    let cat=await Category.findById(req.params.id);
+Router.get('/by/:title',asyncMiddleware(async(req,res)=>{
+    let cat=await Category.findOne({title:req.params.title});
     let catTitle=cat.title;
     let posts=await Post.find({tags:{$all:[`${catTitle}`]}}).sort({updatedAt:-1});
-    console.log(posts);
     let obj={
         title:catTitle,
         description:cat.description,
-        photo:cat.photo,
         followers:cat.followersCount,
         questions:posts
     }
     res.send(obj);
 }));
 
-Router.post('/follow/:id',asyncMiddleware(async(req,res)=>{
+//Cat followed by user logged in
+Router.post('/follow/:id',auth,asyncMiddleware(async(req,res)=>{
     let cat=await Category.findById(req.params.id);
     let followCount=cat.followersCount+1;
     cat.followersCount=followCount;
     await cat.save();
-    let userId=req.body.id;
-    let userInfo=await User.findById(userId);
-    await User.updateOne({_id:userInfo},{$push:{following:cat.title}});
+    let userId=req.userData;
+    let userInfo=await User.findById(userId.id);
+    await User.updateOne({_id:userInfo},{$push:{following:[{followingId:result._id}]}});
     res.send('Success');
 
 }));
