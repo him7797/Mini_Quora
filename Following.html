@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Profile</title>
+    <title>Following</title>
 
     <!-- CSS  -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -156,78 +156,94 @@
             margin-bottom: 100px;
         }
 
-        .mainPanel {
-            background: #FFFFFF;
-            border: 1px solid #EFEFEF;
-            box-sizing: border-box;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
+        .profile_image {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
         }
 
-        .mainPanel span {
-            margin: auto;
-        }
-
-        .edit_span {
+        .sidePanel {
+            background-color: #E5E5E5;
             font-family: Poppins;
             font-style: normal;
             font-weight: normal;
             font-size: 14px;
             line-height: 21px;
-            /* identical to box height */
-            text-align: center;
-            color: #0043EE;
-            text-decoration: none;
-            padding: 10px;
-            cursor: pointer;
-        }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #303030;
 
-        .edit_span a {
-            text-decoration: none;
-            color: #0043EE;
-        }
-
-        .edit_span a:hover {
-            text-decoration: none;
-            color: #0043EE;
 
         }
 
-        .form-group a {
+        .sidePanel ul li {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .sidePanel img {
+            margin-right: 10px;
+        }
+
+        .following_detail {
+            background: #FFFFFF;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 90%;
+            padding-top: 2%;
+        }
+
+        .following_image img {
+            height: 64px;
+            width: 64px;
+            border-radius: 50%;
+        }
+
+        .following_name .user_name {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            color: #303030;
+        }
+
+        .following_status {
+
+
             font-family: Poppins;
             font-style: normal;
             font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #303030;
+        }
+
+        .following_name .profession {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
             font-size: 12px;
             line-height: 18px;
             /* identical to box height */
-            text-decoration: none;
-            color: #0043EE;
+
+
+            color: #4E4E4E;
         }
 
-        .form-group a:hover {
-            text-decoration: none;
-
-            color: #0043EE;
-
+        .follow_detail {
+            background: #FFFFFF;
+            margin-bottom: 20px;
+            height: 100px;
+            width: 90%;
+            padding-top: 2%;
         }
 
-        .save_now {
-            background: #0043EE;
-            border-radius: 24px !important;
-            font-family: Poppins;
-            font-style: normal;
-            font-size: 18px;
-            line-height: 27px;
-            color: #FFFFFF;
-            width: 161px;
-            height: 43px;
-
-        }
-
-        .save_now:hover {
-            color: #FFFFFF;
-            text-decoration: none;
+        .follow_image img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -268,76 +284,79 @@
 
     <div class="container-fluid">
         <div class="row mainBody">
-            <div class="col-3 sidePanel">
+            <div class="col-2 sidePanel">
+                <ul>
+                    <li><img src="assets/bullet.png"> Education</li>
+                    <li><img src="assets/bullet.png"> Sports</li>
+                    <li><img src="assets/bullet.png"> Technology</li>
+                    <li><img src="assets/bullet.png"> Entertainment</li>
+                </ul>
             </div>
-            <div class="col-6 mainPanel">
-                <br>
-                <span class="image_span"><img src="assets/editProfile.png"></span>
-                <span class="edit_span" data-toggle="modal" data-target="#exampleModal">Edit Profile
-                        Picture</span>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Select New Profile Picture</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <label for="img">Select image:</label>
-                                    <input type="file" id="img" name="img" accept="image/*">
-                                  </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
+            <div class="col-1"></div>
+            <div class="col-6 following_panel">
+                <div class="row following_detail">
+                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
+                    <div class="col-6 following_name ">
+                        <span class="user_name">Education</span>
+                        <br>
+                        <span class="profession">3 Posts</span>
+                        <span class="profession">3 Likes</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="following_status">Following</span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-8">
-                        <form action="">
-                            <div class="form-group">
-                                <label for="InputUsername">Name</label>
-                                <input type="email" class="form-control" id="InputUsername">
-                            </div>
-                            <div class="form-group">
-                                <label for="InputEmail">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail"
-                                    aria-describedby="emailHelp">
-                            </div>
-                            <div class="form-group">
-                                <label for="InputDate">Date of Birth</label>
-                                <br>
-                                <input type="date" class="form-control" id="InputDate" name="InputDate">
-                            </div>
-                            <div class="form-group">
-                                <label for="InputProfession">Profession</label>
-                                <input type="text" class="form-control" id="InputProfession">
-                            </div>
-                            <div class="form-group">
-                                <label for="InputPassword">Password</label>
-                                <input type="password" class="form-control" id="InputPassword">
-                                <br>
-                                <a href="#">Change Password</a>
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn save_now">SAVE NOW</button>
-                            </div>
-
-                        </form>
+                <div class="row following_detail">
+                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
+                    <div class="col-6 following_name ">
+                        <span class="user_name">Education</span>
+                        <br>
+                        <span class="profession">3 Posts</span>
+                        <span class="profession">3 Likes</span>
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-2">
+                        <span class="following_status">Following</span>
+                    </div>
+                </div>
+                <div class="row following_detail">
+                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
+                    <div class="col-6 following_name ">
+                        <span class="user_name">Education</span>
+                        <br>
+                        <span class="profession">3 Posts</span>
+                        <span class="profession">3 Likes</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="following_status">Following</span>
+                    </div>
                 </div>
 
             </div>
-            <div class="col-3 profilePanel">
-
+            <div class="col-3 follow_panel">
+                <div class="row follow_detail">
+                    <div class="col-2 follow_image"><img src="assets/answer_photo.png"></div>
+                    <div class="col-6 following_name ">
+                        <span class="user_name">Education</span>
+                        <br>
+                        <span class="profession">3 Posts</span>
+                        <span class="profession">3 Likes</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="following_status">Follow</span>
+                    </div>
+                </div>
+                <div class="row follow_detail">
+                    <div class="col-2 follow_image"><img src="assets/answer_photo.png"></div>
+                    <div class="col-6 following_name ">
+                        <span class="user_name">Education</span>
+                        <br>
+                        <span class="profession">3 Posts</span>
+                        <span class="profession">3 Likes</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="following_status">Follow</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -351,9 +370,13 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
+        // textarea1 = document.querySelector("#answer_from_user");
+        // textarea1.addEventListener('input', autoResize, false);
+
+        // function autoResize() {
+        //     this.style.height = 'auto';
+        //     this.style.height = this.scrollHeight + 'px';
+        // }
 
     </script>
 </body>

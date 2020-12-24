@@ -188,70 +188,6 @@
 
 
 
-        /* #user_question::-webkit-scrollbar {
-            display: none;
-        } */
-
-        .form-group textarea::-webkit-scrollbar {
-            display: none;
-        }
-
-        .question_card {
-            background: #FFFFFF;
-            border: 1px solid #EFEFEF;
-            box-sizing: border-box;
-            border-radius: 4px;
-            width: 100% !important;
-            height: 270px;
-            overflow: scroll;
-        }
-
-        .question_card::-webkit-scrollbar {
-            display: none;
-        }
-
-        .profile_name {
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 20px;
-            line-height: 30px;
-            color: #303030;
-
-        }
-
-        .profile_name .form-control {
-            border-style: hidden;
-        }
-
-        .profile_name .form-control:focus {
-            border-style: groove;
-            border-color: #FF3B3B;
-            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
-        }
-
-
-        .post_button {
-            position: absolute;
-            width: 150px;
-            height: 34px;
-            background: rgba(0, 67, 238, 0.5);
-            border-radius: 32px;
-            font-family: Poppins;
-            font-style: normal;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: -0.165px;
-            color: #FFFFFF;
-            right: 0;
-        }
-
-
-        .post_button:hover {
-            background: rgba(0, 67, 238, 0.5);
-            color: #FFFFFF;
-        }
-
         .profilePanel {
             margin-top: 20px;
             display: flex;
@@ -512,6 +448,33 @@
             width: 24px;
             border-radius: 50%;
         }
+
+        .notify_panel {
+            display: flex;
+            flex-direction: row;
+            background: #FFFFFF;
+            width: 50%;
+            height: 46px;
+            margin: auto;
+            margin-bottom: 5px;
+        }
+
+        .notification_image img {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            margin: 10px 10px;
+        }
+
+        .notification_detail {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -561,125 +524,21 @@
                 </ul>
             </div>
             <div class="col-8 mainPanel">
-                <div class="row question_panel">
-                    <div class="card question_card">
-                        <div class="row card-body">
-                            <div class="col-2 profile_image"><img src="assets/profile.png"></div>
-                            <div class="col-10 profile_name">
-                                <div class="form-group">
-                                    <label for="user_question">Koshal Bothra</label>
-                                    <textarea class="form-control" id="user_question" rows="3"
-                                        placeholder="Ask any questions running in your mind"></textarea>
-                                </div>
-                                <div class=" row form-group">
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-
-
-                                </div>
-                                <button type="button" class="btn post_button">POST QUESTIONS</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="notify_panel">
+                    <div class="notification_image"><img src="assets/profile.png"></div>
+                    <div class="notification_detail">Bhaskar Katragadda Liked Your Question</div>
                 </div>
-
-                <div class="row answer_panel">
-                    <div class="card answer_card">
-                        <div class="card-body">
-                            <div class="row asking_user_details">
-                                <div class="col-1 answer_image"><img src="assets/answer_photo.png"></div>
-                                <div class="col-9 answer_name ">
-                                    <span class="asked_by">Nitin Momaya</span>
-                                    <span class="profession">UX Designer</span>
-                                </div>
-                                <div class="col-2 date_of_submission">
-                                    9 Nov 2020
-                                </div>
-                            </div>
-                            <div class="row question_asked">
-                                <span class="question_headline">
-                                    How to become an UI/UX Designer and get a job in India?
-                                </span>
-                            </div>
-                            <div class="row tags_used">
-                                <span class="badge">Technology</span>
-                                <span class="badge">Design</span>
-                            </div>
-                            <div class="row upvote_details">
-                                <span>3 Upvotes</span>
-                                <span>3 Downvotes</span>
-                                <span>3 Answers</span>
-                            </div>
-                            <div class="row upvote_buttons">
-                                <span><img src="./assets/up-arrow.png"> Upvote</span>
-                                <span><img src="./assets/down-arrow.png"> Downvote</span>
-                                <span><img src="./assets/chat.png"> Answer</span>
-                            </div>
-                            <hr>
-                            <div class="row answer_user_details">
-                                <div class="col-1 answer_image"><img src="assets/answer_photo.png"></div>
-                                <div class="col-9 answer_name ">
-                                    <span class="asked_by">Nitin Momaya</span>
-                                    <span class="profession">UX Designer</span>
-                                </div>
-                                <div class="col-2 date_of_submission">
-                                    9 Nov 2020
-                                </div>
-                            </div>
-                            <pre class="question_detail">
-To become anything one must have a learning attitude and desire to grow and get
-those constructive criticism which eventually triggers your ego! you need to prepare
-your mindset for things you want to learn and especially you are trying to build a
-career on the same thing! listing few points which will help you to start as a UI/UX
-Designer
-                                
-1. Get Familar to one of the tools i.e Figma, Adobe Xd and Sketch there are many
-more list are endless but i found FIgma much better among them Because it’s easy to
-learn and get adopted evrything has it’s consequences but Figma does most of thing
-you a UX designer does
-                                
-2. Learning UX Principles, Colour Theory ,Typography, Visual hierarchy, UX Methods
-is a must things. everything has it’s own Value and used in most of the cases. there
-is no order to learn them you can go whatever make you curious...
-                                
-3. Ability to understand product/Services is a must if you don’t invest time to
-learn about product for whom it is and who will used it? purpose of using it ? it
-will gonna be hard to design Layouts for any product...
-                                
-4. IN THE END PRATICE PRATICE PRATICE it’s a never ending process you must keep
-learning each and everyday. Product Designer are here to solve the problem and make
-the product useful. not make a beautiful art gallery. Design with Purpose.
-                                                                </pre>
-                            <div class="row upvote_details">
-                                <span>3 Upvotes</span>
-                                <span>3 Downvotes</span>
-                            </div>
-                            <div class="row upvote_buttons">
-                                <span><img src="./assets/up-arrow.png"> Upvote</span>
-                                <span><img src="./assets/down-arrow.png"> Downvote</span>
-                            </div>
-                            <div class="row user_answer">
-                                <span><img class="user_image" src="./assets/user_answer.png"></span>
-                                <div class="col-10">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="answer_from_user" rows="3"
-                                            placeholder="Write Answer as Koshal Bothra"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="notify_panel">
+                    <div class="notification_image"><img src="assets/profile.png"></div>
+                    <div class="notification_detail">Bhaskar Katragadda Liked Your Question</div>
+                </div>
+                <div class="notify_panel">
+                    <div class="notification_image"><img src="assets/profile.png"></div>
+                    <div class="notification_detail">Bhaskar Katragadda Liked Your Question</div>
+                </div>
+                <div class="notify_panel">
+                    <div class="notification_image"><img src="assets/profile.png"></div>
+                    <div class="notification_detail">Bhaskar Katragadda Liked Your Question</div>
                 </div>
             </div>
             <div class="col-2 profilePanel">
