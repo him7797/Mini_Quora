@@ -19,7 +19,11 @@ const Posts = mongoose.Schema({
       },
       createdAt:{
         type:Date
-      }
+      },
+        createdBy:{
+          type:mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
     totalAnswers:{
       type:Number,
@@ -37,9 +41,25 @@ const Posts = mongoose.Schema({
     status:{
       type:Boolean,
       default:true
+    },
+    likesBy:[{
+        likedBy:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        createdAt:{
+            type:Date
+        },
+        likeStatus:{
+            type:Boolean
+        }
+    }],
+    totalLikes:{
+        type:Number,
+        default:0
     }
   },{timestamps: true});
 
 
 
-  module.exports = mongoose.model('Posts', Posts);
+module.exports = mongoose.model('Posts', Posts);

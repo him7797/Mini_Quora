@@ -1,17 +1,20 @@
 const express = require("express");
 const Router = express.Router();
 const Validation=require('../validations/user');
+// const forgotPassword=require('../models/forgotPassword');
 const User=require('../models/user');
 const Post=require('../models/post');
+// const msg91=require('../helper/otp');
 const bcrypt=require('bcrypt');
+const Category=require('../models/category');
 const multer = require('multer');
 const Config=require('../config/config');
 const asyncMiddleware=require('../middleware/async');
 const jwt=require('jsonwebtoken');
 const localstorage=require('local-storage');
 const auth=require('../middleware/auth');
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+    "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
 //Setting up multer for photo upload
@@ -40,35 +43,40 @@ Router.get('/logIn', asyncMiddleware(function(req, res){
 
 //Rendering and sending the Home page
 Router.get('/',auth,asyncMiddleware(async(req,res)=>{
-    let pageNo = req.query.pageNo;
     let user=await User.findById(req.userData.id);
-    let limit = 10;
-    let skipPosts = (pageNo-1)*limit;
-    let posts=await Post.find({status:true}).sort({updatedAt:-1}).skip(skipPosts).limit(limit)
-        .populate('postBy')
-        .populate('answers.answerId');
+    let posts=await Post.find({status:true}).sort({updatedAt:-1}).populate('postBy').populate('answers.answerId');
     let allPosts=[];
     let totalTags=[];
     for(let i in posts) {
         if (posts[i].answers.length > 0) {
-            let name = await User.findById(posts[i].answers[0].answerId.createdBy);
-            name = name.name;
+            let answerUser = await User.findById(posts[i].answers[0].answerId.createdBy);
+            let answerName = answerUser.name;
+            let answerProfession=answerUser.about;
+            let answerPhoto=answerUser.photo;
+
             let obj;
             obj = {
                 title: posts[i].title,
-                totalanswers: posts[i].totalAnswers,
+                totalAnswers: posts[i].totalAnswers,
                 tags: posts[i].tags,
+                id:posts[i]._id,
+                userId:posts[i].postBy._id,
                 postBy: posts[i].postBy.name,
                 postByPhoto:posts[i].postBy.photo,
                 profession: posts[i].postBy.about,
-                photo: posts[i].photo,
+                answerName: answerName,
+                postLike:posts[i].totalLikes,
+                answerProfession:answerProfession,
+                answerPhoto:answerPhoto,
                 totalLikes: posts[i].answers[0].answerId.totalLikes,
                 description: posts[i].answers[0].answerId.description,
-                answerBy: name,
-                year: posts[i].createdAt.getFullYear(),
-                month: monthNames[posts[i].createdAt.getMonth()],
-                date: posts[i].createdAt.getDate(),
-                userPhoto: posts[i].postBy.photo,
+                postYear: posts[i].createdAt.getFullYear(),
+                postMonth: monthNames[posts[i].createdAt.getMonth()],
+                postDate: posts[i].createdAt.getDate(),
+                answerYear:posts[i].answers[0].answerId.createdAt.getFullYear(),
+                answerMonth:monthNames[posts[i].answers[0].answerId.createdAt.getMonth()],
+                answerDate:posts[i].answers[0].answerId.createdAt.getDate()
+
             };
             allPosts.push(obj);
             totalTags.push(posts[i].tags);
@@ -76,15 +84,19 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
             let obj;
             obj = {
                 title: posts[i].title,
-                totalanswers: posts[i].totalAnswers,
+                totalAnswers: posts[i].totalAnswers,
                 tags: posts[i].tags,
+                id:posts[i]._id,
+                userId:posts[i].postBy._id,
                 postBy: posts[i].postBy.name,
+                postLike:posts[i].totalLikes,
                 profession: posts[i].postBy.about,
-                photo: posts[i].photo,
-                year: posts[i].createdAt.getFullYear(),
-                month: monthNames[posts[i].createdAt.getMonth()],
-                date: posts[i].createdAt.getDate(),
-                userPhoto: posts[i].postBy.photo,
+                postYear: posts[i].createdAt.getFullYear(),
+                postMonth: monthNames[posts[i].createdAt.getMonth()],
+                postDate: posts[i].createdAt.getDate(),
+                postByPhoto: posts[i].postBy.photo,
+                description:"Be the first one to answer!",
+                totalLikes:0
             };
             allPosts.push(obj);
             totalTags.push(posts[i].tags);
@@ -105,7 +117,21 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
         }
     }
     const unique=Array.from(new Set(newTag));
-    console.log(unique);
+    let categories=[];
+    for(let k in unique)
+    {
+        let catInfo=await Category.find({title:unique[k]});
+        console.log(catInfo);
+        if(catInfo.length===0)
+        {
+            categories.push({title:unique[k],description:"All About "+`${unique[k]}`+" Posts"});
+        }
+
+    }
+    let newcat=await Category.insertMany(categories);
+    console.log(newcat);
+
+
 res.render('home',{
     posts:allPosts,
     userInfo:user,
@@ -120,7 +146,7 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
           name:req.body.name,
           email:req.body.email,
 
-        }
+        };
         let error=await Validation.validateUser(obj);
         
         if (error.isJoi) return res.status(401).json({
@@ -139,7 +165,8 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
             email:req.body.email,
             password:req.body.password,
             about:req.body.profession,
-            dob:req.body.dob
+            dob:req.body.dob,
+            photo:'/public/Baby Yoda.jpeg'
         }
         let newUser=new User(finalObj);
         const salt=await bcrypt.genSalt(10);
@@ -185,7 +212,7 @@ Router.get('/logout',asyncMiddleware(async(req,res)=>{
     res.render('logIn');
 }));
 
-Router.get('/change/profilePic',asyncMiddleware(async(req,res)=>{
+Router.get('/profilePic',asyncMiddleware(async(req,res)=>{
     res.render('uploadProfilePic');
 }))
 
@@ -229,22 +256,19 @@ Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(asy
     // let userInfo=req.body.email;
     let id=req.userData.id;
     let user=await User.findById(id);
-    let path=req.file.path;
-    path=path.replace(/\\/g,"/");
-    let imageName=path.slice(7);
-
-
-    let imageFullPath=await Validation.manipulateImage(path,imageName);
-
+    let Path=req.file.path;
+    Path=Path.replace(/\\/g,"/");
+    Path='/'.concat(Path);
+    console.log(Path);
     if(email)
     {
-        await User.updateOne({email:email},{$set:{photo:imageFullPath}});
+        await User.updateOne({email:email},{$set:{photo:Path}});
         let UserInfo={
             userName:user.name,
             userEmail:user.email,
             userDob:user.dob,
             userProfession:user.about,
-            userPhoto:imageFullPath,
+            userPhoto:Path,
             userPassword:user.password
 
         };
@@ -253,7 +277,7 @@ Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(asy
         });
     }
     return res.status(401).json({
-
+         'message':"User with given email not found"
     });
 }));
 
@@ -283,24 +307,24 @@ Router.get('/:id',asyncMiddleware(async(req,res)=>{
 //           message: "Phone number invalid"
 //         });
 //       }
-//       let userInfo=await User.findOne({phone:phone});
-//       if(userInfo)
-//       {
+//       // let userInfo=await User.findOne({phone:phone});
+//
 //         let code=Math.floor(1000 + Math.random() * 9000);
-//         const newForPas=new forgotPassword({
-//           user:userInfo._id,
-//           phone:userInfo.phone,
-//           code:code
-//         });
-//         await newForPas.save();
-//         await forgotPassword.updateOne({_id:newForPas._id},{$set:{status:true}});
+//         // const newForPas=new forgotPassword({
+//         //   user:userInfo._id,
+//         //   phone:userInfo.phone,
+//         //   code:code
+//         //
+//         // await newForPas.save();
+//         // await forgotPassword.updateOne({_id:newForPas._id},{$set:{status:true}});
 //         let Send=await msg91.sendOTP(code,phone);
 //         if(Send.type!="success")
 //         {
 //           return res.status(401).json({
 //             status: "Failed",
 //             message: "Code Not Sent",
-//             name: userInfo.name,
+//               body:Send
+//
 //
 //         });
 //         }
@@ -308,13 +332,11 @@ Router.get('/:id',asyncMiddleware(async(req,res)=>{
 //           return res.status(200).json({
 //             status: "Success",
 //             message: "Code Sent",
-//             name: userInfo.name,
+//
 //             body:Send
 //         });
 //         }
-//       }
-//
-// }));
+//       }));
 //
 // Router.post('/otp',asyncMiddleware(async(req,res)=>{
 //     let code=req.body.code;

@@ -3,7 +3,7 @@ html(lang='en')
     head
         meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
-        title HomePage
+        title Answer
         // CSS
         link(href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet')
         link(href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet')
@@ -112,12 +112,7 @@ html(lang='en')
                 display: flex;
                 justify-content: space-between;
                 font-size: 14px;
-                margin-right: 30px;
-            }
-
-            .links a {
-
-                margin-right: 30px;
+                margin: 0;
             }
             .navbar_elements {
                 display: flex;
@@ -155,7 +150,6 @@ html(lang='en')
             .sidePanel img {
                 margin-right: 10px;
             }
-            .mainPanel {}
             /* #user_question::-webkit-scrollbar {
             display: none;
             } */
@@ -207,33 +201,7 @@ html(lang='en')
             .post_button:hover {
                 background: rgba(0, 67, 238, 0.5);
                 color: #FFFFFF;
-
             }
-
-            .post_answer {
-                width: 100px;
-                height: 34px;
-                background: rgba(0, 67, 238, 0.5);
-                border-radius: 32px;
-                font-family: Poppins;
-                font-style: normal;
-                font-size: 12px;
-                line-height: 18px;
-                letter-spacing: -0.165px;
-                color: #FFFFFF;
-                margin-top: 20px;
-            }
-
-            .post_answer:hover {
-                background: rgba(0, 67, 238, 0.5);
-                color: #FFFFFF;
-
-            }
-            .post_answer{
-                display: flex;
-                flex-direction: column;
-            }
-
             .profilePanel {
                 margin-top: 20px;
                 display: flex;
@@ -304,8 +272,19 @@ html(lang='en')
             }
             .answer_panel {
                 width: 100%;
-                padding-top: 40px;
                 padding-bottom: 20px;
+            }
+
+            .links {
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                margin-right: 30px;
+            }
+
+            .links a {
+
+                margin-right: 30px;
             }
             .answer_card {
                 background: #FFFFFF;
@@ -378,7 +357,7 @@ html(lang='en')
                 font-size: 16px;
                 line-height: 24px;
                 color: #303030;
-                margin: 30px 16px;
+                margin: 10px 16px;
                 text-align: left;
             }
             pre {
@@ -403,7 +382,7 @@ html(lang='en')
                 margin-top: 10px;
                 margin-left: 16px;
             }
-            .upvote_details span   {
+            .upvote_details span {
                 font-family: Poppins;
                 font-style: normal;
                 font-weight: normal;
@@ -412,20 +391,9 @@ html(lang='en')
                 /* identical to box height */
                 letter-spacing: -0.165px;
                 color: #303030;
+                margin-top: 15px;
                 margin-left: 17px;
             }
-
-            .upvote_details  a {
-                text-decoration: none;
-                color: #303030;
-            }
-
-            .upvote_details a:hover{
-                text-decoration: none;
-                color: #303030;
-            }
-
-
             .upvote_buttons span {
                 font-family: Poppins;
                 font-style: normal;
@@ -436,6 +404,31 @@ html(lang='en')
                 color: #303030;
                 margin-top: 10px;
                 margin-left: 10px;
+            }
+
+            .post_answer {
+                width: 100px;
+                height: 34px;
+                background: rgba(0, 67, 238, 0.5);
+                border-radius: 32px;
+                font-family: Poppins;
+                font-style: normal;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: -0.165px;
+                color: #FFFFFF;
+                margin-top: 20px;
+            }
+
+            .post_answer:hover {
+                background: rgba(0, 67, 238, 0.5);
+                color: #FFFFFF;
+
+            }
+
+            .post_answer {
+                display: flex;
+                flex-direction: column;
             }
             .user_answer {
                 font-family: Poppins;
@@ -451,8 +444,7 @@ html(lang='en')
             .user_answer textarea::-webkit-scrollbar {
                 display: none;
             }
-            .user_image
-            {
+            .user_image {
                 height: 24px;
                 width: 24px;
                 border-radius: 50%;
@@ -475,59 +467,35 @@ html(lang='en')
                     a.active(href='/api/users/') Home
                     a(href='') Following
                     a(href='') Notifications
+
         .container-fluid
             .row.mainBody
                 .col-2.sidePanel
                     ul
-                        each val in tags
+                        each val in cat
                             li
                                 a(href='/api/category/by/' + val)
                                     img(src='/public/bullet.png')
                                     label=val
                 .col-8.mainPanel
-                    .row.question_panel
-                        .card.question_card
-                            .row.card-body
-                                .col-2.profile_image
-                                    img(src=`${userInfo.currentUserPhoto}`,alt='Avatar',class="profile_image")
-                                .col-10.profile_name
-                                    form(method='POST',action='/api/posts/')
-                                      div.form-group
-                                          label=`${userInfo.currentUser}`
-                                          input.form-control(rows='3',name='title',type='text',placeholder='Ask any questions running in your mind')
-                                      div.row.form-group
-                                            .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
-                                            .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
-                                            .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
-                                      button.btn.post_button(type='submit') Post Question
-
-
                     .row.answer_panel
-                       each val in posts
-                         .card.answer_card
+                        .card.answer_card
                             .card-body
                                 .row.asking_user_details
                                     .col-1.answer_image
-                                        img(src=`${val.postByPhoto}`,class="profile_image")
-                                        br
-                                        br
+                                        img(src=`${posts.postByPhoto}`,class="profile_image")
                                     .col-9.answer_name
-                                        a(href='/api/users/:id'+val.userId)
-                                         span.asked_by=`${val.postBy}`
-                                        span.profession=`${val.profession}`
-                                    .col-2.date_of_submission=`${val.postDate}`+" "+`${val.postMonth}`+" "+`${val.postYear}`
+                                        span.asked_by=`${posts.postBy}`
+                                        span.profession=`${posts.profession}`
+                                    .col-2.date_of_submission=`${posts.postDate}`+" "+`${posts.postMonth}`+" "+`${posts.postYear}`
                                 .row.question_asked
-                                    span.question_headline=`${val.title}`
+                                    span.question_headline=`${posts.title}`
                                 .row.tags_used
-                                    each item in val.tags
+                                    each item in posts.tags
                                         span.badge=`${item}`
                                 .row.upvote_details
-                                    span= `${val.postLike}` + " Upvotes"
-                                    a(href='/api/posts/'+val.id)
-                                        span= `${val.totalAnswers}` + " Answers"
+                                    span= `${posts.postLike}` + " Upvotes"
+                                    span= `${posts.totalAnswers}` + " Answers"
                                 .row.upvote_buttons
                                     span
                                         img(src='/public/up-arrow.png')
@@ -538,60 +506,51 @@ html(lang='en')
                                     span
                                         img(src='/public/chat.png')
                                         |  Answer
-                                hr
-                                if val.answerPhoto
-                                  .row.answer_user_details
-                                      .col-1.answer_image
-                                          img(src=`${val.answerPhoto}`,class="profile_image")
 
-                                      .col-9.answer_name
-                                          span.asked_by=`${val.answerName}`
-                                          span.profession=`${val.answerProfession}`
-                                      .col-2.date_of_submission=`${val.answerDate}`+" "+`${val.answerMonth}`+" "+`${val.answerYear}`
-                                  pre.question_detail=`${val.description}`
-                                  .row.upvote_details
-                                      span= `${val.totalLikes}` + " Upvotes"
-                                  .row.upvote_buttons
-                                      span
-                                          img(src='/public/up-arrow.png')
-                                          |  Upvote
-                                      span
-                                          img(src='/public/down-arrow.png')
-                                          |  Downvote
-
-                                  .row.user_answer
-                                      span
-                                          img.user_image(src=`${userInfo.currentUserPhoto}`)
-                                      .col-10
-                                          form(method='POST',action='/api/answers/'+val.id)
-                                           div.post_ans.form-group
-                                               input.form-control(rows='3' ,name='description',placeholder='Write Answer as'+`${userInfo.currentUser}`,class="")
-                                               button.btn.post_answer(type='submit') Post Answer
-                                else
+                                each val in answers
+                                    hr
                                     .row.answer_user_details
 
-                                    pre.question_detail=`${val.description}`
-                                    .row.user_answer
-                                        span
-                                            img.user_image(src=`${userInfo.currentUserPhoto}`)
-                                        .col-10
-                                            form(method='POST',action='/api/answers/'+val.id)
-                                                div.post_ans.form-group
-                                                    input.form-control(rows='3' ,name='description',placeholder='Write Answer as' + `${userInfo.currentUser}`,class="")
-                                                    button.btn.post_answer(type='submit') Post Answer
+                                        .col-1.answer_image
+                                            img(src=`${val.answerPhoto}`,class="profile_image")
+                                        .col-9.answer_name
+                                            span.asked_by=`${val.answerName}`
+                                            span.profession=`${val.answerProfession}`
+                                        .col-2.date_of_submission=`${val.answerDate}`+" "+`${val.answerMonth}`+" "+`${val.answerYear}`
+                                    br
 
+                                    pre.question_detail=`${val.description}`
+                                    .row.upvote_details
+                                        span= `${val.totalLikes}` + " Upvotes"
+                                    .row.upvote_buttons
+                                        span
+                                            img(src='/public/up-arrow.png')
+                                            |  Upvote
+                                        span
+                                            img(src='/public/down-arrow.png')
+                                            |  Downvote
+
+
+
+                                .row.user_answer
+                                    span
+                                        img.user_image(src=`${userInfo.currentUserPhoto}`)
+                                    .col-10
+                                        form(method='POST',action='/api/answers/' + posts.id)
+                                            div.post_ans.form-group
+                                                input.form-control(rows='3' ,name='description',placeholder='Write Answer as' + `${userInfo.currentUser}`,class="")
+                                                button.btn.post_answer(type='submit') Post Answer
                 .col-2.profilePanel
                     span.image_span
                         img(src=`${userInfo.currentUserPhoto}`,class="user_image")
                     span.profilename_span
-                        a(href="/api/users/"+userInfo.id)=userInfo.currentUser
+                        a(href="/api/users/" + userInfo.id)=userInfo.currentUser
                     span.detail_span
-                        a(href="/api/users/"+userInfo.id) Edit Details
+                        a(href="/api/users/" + userInfo.id) Edit Details
                     span.logout_span
                         a(href='/api/users/logout') Logout
         // Scripts
         script(src='https://code.jquery.com/jquery-2.1.1.min.js')
         script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
-        script(type='text/javascript').
 

@@ -31,6 +31,9 @@ const Answers = mongoose.Schema({
         },
         createdAt:{
           type:Date
+        },
+        likeStatus:{
+            type:Boolean
         }
       }],
     disLikeBy:[{

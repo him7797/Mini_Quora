@@ -6,10 +6,11 @@ const Category = mongoose.Schema({
    
     title:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     photo:{
-        type:String,
+        type:String
     },
     description:{
         type:String,

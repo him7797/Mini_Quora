@@ -4,12 +4,13 @@ const User=require('../models/user');
 const Post=require('../models/post');
 const Answer=require('../models/answer');
 const asyncMiddleware=require('../middleware/async');
+const auth=require('../middleware/auth');
 
 
-Router.post('/',asyncMiddleware(async(req,res)=>{
+Router.post('/:id',auth,asyncMiddleware(async(req,res)=>{
    let description=req.body.description;
-   let createdBy=req.body.createdBy;
-   let createdOn=req.body.createdOn;
+   let createdBy=req.userData.id;
+   let createdOn=req.params.id;
    let obj={
        description:description,
        createdBy:createdBy,
@@ -17,52 +18,55 @@ Router.post('/',asyncMiddleware(async(req,res)=>{
    };
    let newAnswer=new Answer(obj);
    let result=await newAnswer.save();
-   let totalanswers=await Post.findById(createdOn);
-   totalanswers=totalanswers.totalAnswers;
    let postUpdate={
     $push:{
-      answers:[{answerId:result._id}]
+      answers:[{answerId:result._id,createdBy:createdBy,createdAt:Date.now()}]
      },
-    $set:{
-        totalAnswers:totalanswers+1
+    $inc:{
+        totalAnswers:1
     }
-    
    };
    let userUpdate={
     $push:{
       answers:[{answerId:result._id,createdAt:Date.now()}]
      }
    }
-
    await User.updateOne({_id:createdBy},userUpdate);
    await Post.updateOne({_id:createdOn},postUpdate);
-   res.send(result);
+   res.redirect('/api/users/');
 }));
 
 Router.put('/like/:id',asyncMiddleware(async(req,res)=>{
-  let result=await Answer.findById(req.params.id);
-  if(result)
-  {
-      let totallikes=result.totalLikes;
-      let userInfo=req.body.userid
-      let doc={
-        $set:{
-          totalLikes:totallikes+1
-        },
-        $push:{
-          likesBy:[{likedBy:userInfo,createdAt:Date.now()}]
-         }
-      }
-      await Answer.updateOne({_id:req.params.id},doc);
-      return res.status(200).json({
-        status: "Success",
-        message: "Updated"
+    let userId=req.body.id;
+    let ansId=req.params.id;
+    let checkLike=await Answer.find({$and:[{_id:ansId},{"likesBy.likedBy":userId},{"likesBy.likeStatus":true}]});
+    console.log(checkLike);
+    if(checkLike.length>0) return res.status(409).json({
+        status: "Failed",
+        message: 'Answer Already Liked'
     });
-  }
-  return res.status(401).json({
-    status: "Failed",
-    message: "Answer with given id not found!"
-});
+    else
+    {
+        let obj;
+        obj={
+            $inc:{
+                totalLikes:1
+            },
+            $addToSet:{
+                likesBy:{
+                    likedBy:userId,
+                    createdAt:Date.now(),
+                    likeStatus:true
+                },
+            }
+
+        };
+        await Answer.updateOne({_id:ansId},obj);
+        return res.status(409).json({
+            status: "Success",
+            message: 'Answer Liked'
+        });
+    }
   
 }));
 
@@ -72,7 +76,7 @@ Router.put('/disLike/:id',asyncMiddleware(async(req,res)=>{
     if(result)
     {
         let totalDislikes=result.totalDisLikes;
-        let userInfo=req.body.userid
+        let userInfo=req.body.userId
         let doc={
           $set:{
             totalDisLikes:totalDislikes+1
