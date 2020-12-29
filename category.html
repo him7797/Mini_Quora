@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>HomePage</title>
+    <title>Category</title>
 
     <!-- CSS  -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -156,11 +156,6 @@
             margin-bottom: 100px;
         }
 
-        .profile_image {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-        }
 
         .sidePanel {
             background-color: #E5E5E5;
@@ -192,65 +187,7 @@
             display: none;
         } */
 
-        .form-group textarea::-webkit-scrollbar {
-            display: none;
-        }
 
-        .question_card {
-            background: #FFFFFF;
-            border: 1px solid #EFEFEF;
-            box-sizing: border-box;
-            border-radius: 4px;
-            width: 100% !important;
-            height: 270px;
-            overflow: scroll;
-        }
-
-        .question_card::-webkit-scrollbar {
-            display: none;
-        }
-
-        .profile_name {
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 20px;
-            line-height: 30px;
-            color: #303030;
-
-        }
-
-        .profile_name .form-control {
-            border-style: hidden;
-        }
-
-        .profile_name .form-control:focus {
-            border-style: groove;
-            border-color: #FF3B3B;
-            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
-        }
-
-
-        .post_button {
-            position: absolute;
-            width: 150px;
-            height: 34px;
-            background: rgba(0, 67, 238, 0.5);
-            border-radius: 32px;
-            font-family: Poppins;
-            font-style: normal;
-            font-size: 12px;
-            line-height: 18px;
-            letter-spacing: -0.165px;
-            color: #FFFFFF;
-            right: 0;
-        }
-
-
-        .post_button:hover {
-            background: rgba(0, 67, 238, 0.5);
-            color: #FFFFFF;
-        }
 
         .profilePanel {
             margin-top: 20px;
@@ -339,14 +276,107 @@
             border-radius: 50%;
         }
 
-        .question_panel {
+        .profile_card {
+            height: 280px;
             width: 100%;
+            margin: 0px 30px;
+            background: url('./assets/cover_photo.png');
+        }
+
+
+        .detail_card {
+            height: 150px;
+            width: 100%;
+            margin: 0px 30px;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile_image img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+
+        }
+
+        .category_details {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            bottom: 15%;
+
+        }
+
+        .category_name {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 36px;
+            /* identical to box height */
+
+
+            color: #FFFFFF;
+
+        }
+
+        .category_count {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height */
+
+
+            color: #FEFEFE;
+
+        }
+
+        .follow_button {
+            width: 90px;
+            height: 35px;
+            background: #FF8C8C;
+            border-radius: 4px;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #FFFFFF;
+            margin-top: 10px;
+        }
+
+        .heading_part {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #4E4E4E;
+            margin-bottom: 20px;
+
+        }
+
+        .maindetail {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+
+            color: #303030;
         }
 
         .answer_panel {
             width: 100%;
-            padding-top: 40px;
-            padding-bottom: 20px;
+            padding-top: 20px;
+            margin: 0;
         }
 
         .answer_card {
@@ -355,7 +385,6 @@
             box-sizing: border-box;
             border-radius: 4px;
             width: 100% !important;
-            margin-bottom: 20px !important;
         }
 
         .answer_name {
@@ -427,25 +456,6 @@
             margin: 0px 16px;
         }
 
-        .question_detail {
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 24px;
-            color: #303030;
-            margin: 10px 16px;
-            text-align: left;
-        }
-
-        pre {
-            overflow: scroll;
-        }
-
-        pre::-webkit-scrollbar {
-            display: none;
-        }
-
         .tags_used span {
             background: #FFFFFF;
             border: 1px solid #FF3B3B;
@@ -488,30 +498,6 @@
             margin-top: 10px;
             margin-left: 10px;
         }
-
-        .user_answer {
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 18px;
-            /* identical to box height */
-            color: #383838;
-            margin-top: 20px;
-            margin-left: 2px;
-
-
-        }
-
-        .user_answer textarea::-webkit-scrollbar {
-            display: none;
-        }
-
-        .user_image {
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-        }
     </style>
 </head>
 
@@ -541,10 +527,6 @@
                 <a class="active" href="Homepage.html">Home</a>
                 <a href="">Following</a>
                 <a href="">Notifications</a>
-
-            </div>
-            <div class="col-2">
-                <a href="Login.html"><button type="button" class="btn add_question">ADD QUESTIONS</button></a>
             </div>
         </div>
     </nav>
@@ -561,38 +543,29 @@
                 </ul>
             </div>
             <div class="col-8 mainPanel">
-                <div class="row question_panel">
-                    <div class="card question_card">
+                <div class="row profile_panel">
+                    <div class="card profile_card">
                         <div class="row card-body">
-                            <div class="col-2 profile_image"><img src="assets/profile.png"></div>
-                            <div class="col-10 profile_name">
-                                <div class="form-group">
-                                    <label for="user_question">Koshal Bothra</label>
-                                    <textarea class="form-control" id="user_question" rows="3"
-                                        placeholder="Ask any questions running in your mind"></textarea>
-                                </div>
-                                <div class=" row form-group">
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" class="tag_input"
-                                            placeholder="Enter Tags">
-                                    </div>
-
-
-                                </div>
-                                <button type="button" class="btn post_button">POST QUESTIONS</button>
+                            <div class="col-6 category_details">
+                                <span class="category_name">Education</span>
+                                <span class="category_count">500 Followers | 30 Posts</span>
+                                <button type="button" class="btn follow_button">Follow</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
-
+                <div class="row detail_panel">
+                    <div class="card detail_card">
+                        <div class="row card-body details">
+                            <span class="heading_part">Description</span>
+                            <span class="maindetail">Education is the process of facilitating learning, or the
+                                acquisition of knowledge, skills, values, morals, beliefs, and habits. Educational
+                                methods include teaching, training, storytelling, discussion and directed
+                                research.</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row answer_panel">
                     <div class="card answer_card">
                         <div class="card-body">
@@ -617,16 +590,20 @@
                             </div>
                             <div class="row upvote_details">
                                 <span>3 Upvotes</span>
-                                <span>3 Downvotes</span>
                                 <span>3 Answers</span>
                             </div>
                             <div class="row upvote_buttons">
                                 <span><img src="./assets/up-arrow.png"> Upvote</span>
-                                <span><img src="./assets/down-arrow.png"> Downvote</span>
                                 <span><img src="./assets/chat.png"> Answer</span>
                             </div>
                             <hr>
-                            <div class="row answer_user_details">
+                        </div>
+                    </div>
+                </div>
+                <div class="row answer_panel">
+                    <div class="card answer_card">
+                        <div class="card-body">
+                            <div class="row asking_user_details">
                                 <div class="col-1 answer_image"><img src="assets/answer_photo.png"></div>
                                 <div class="col-9 answer_name ">
                                     <span class="asked_by">Nitin Momaya</span>
@@ -636,49 +613,59 @@
                                     9 Nov 2020
                                 </div>
                             </div>
-                            <pre class="question_detail">
-To become anything one must have a learning attitude and desire to grow and get
-those constructive criticism which eventually triggers your ego! you need to prepare
-your mindset for things you want to learn and especially you are trying to build a
-career on the same thing! listing few points which will help you to start as a UI/UX
-Designer
-                                
-1. Get Familar to one of the tools i.e Figma, Adobe Xd and Sketch there are many
-more list are endless but i found FIgma much better among them Because it’s easy to
-learn and get adopted evrything has it’s consequences but Figma does most of thing
-you a UX designer does
-                                
-2. Learning UX Principles, Colour Theory ,Typography, Visual hierarchy, UX Methods
-is a must things. everything has it’s own Value and used in most of the cases. there
-is no order to learn them you can go whatever make you curious...
-                                
-3. Ability to understand product/Services is a must if you don’t invest time to
-learn about product for whom it is and who will used it? purpose of using it ? it
-will gonna be hard to design Layouts for any product...
-                                
-4. IN THE END PRATICE PRATICE PRATICE it’s a never ending process you must keep
-learning each and everyday. Product Designer are here to solve the problem and make
-the product useful. not make a beautiful art gallery. Design with Purpose.
-                                                                </pre>
+                            <div class="row question_asked">
+                                <span class="question_headline">
+                                    How to become an UI/UX Designer and get a job in India?
+                                </span>
+                            </div>
+                            <div class="row tags_used">
+                                <span class="badge">Technology</span>
+                                <span class="badge">Design</span>
+                            </div>
                             <div class="row upvote_details">
                                 <span>3 Upvotes</span>
-                                <span>3 Downvotes</span>
+                                <span>3 Answers</span>
                             </div>
                             <div class="row upvote_buttons">
                                 <span><img src="./assets/up-arrow.png"> Upvote</span>
-                                <span><img src="./assets/down-arrow.png"> Downvote</span>
+                                <span><img src="./assets/chat.png"> Answer</span>
                             </div>
-                            <div class="row user_answer">
-                                <span><img class="user_image" src="./assets/user_answer.png"></span>
-                                <div class="col-10">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="answer_from_user" rows="3"
-                                            placeholder="Write Answer as Koshal Bothra"></textarea>
-                                    </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row answer_panel">
+                    <div class="card answer_card">
+                        <div class="card-body">
+                            <div class="row asking_user_details">
+                                <div class="col-1 answer_image"><img src="assets/answer_photo.png"></div>
+                                <div class="col-9 answer_name ">
+                                    <span class="asked_by">Nitin Momaya</span>
+                                    <span class="profession">UX Designer</span>
+                                </div>
+                                <div class="col-2 date_of_submission">
+                                    9 Nov 2020
                                 </div>
                             </div>
+                            <div class="row question_asked">
+                                <span class="question_headline">
+                                    How to become an UI/UX Designer and get a job in India?
+                                </span>
+                            </div>
+                            <div class="row tags_used">
+                                <span class="badge">Technology</span>
+                                <span class="badge">Design</span>
+                            </div>
+                            <div class="row upvote_details">
+                                <span>3 Upvotes</span>
+                                <span>3 Answers</span>
+                            </div>
+                            <div class="row upvote_buttons">
+                                <span><img src="./assets/up-arrow.png"> Upvote</span>
+                                <span><img src="./assets/chat.png"> Answer</span>
+                            </div>
+                            <hr>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -700,7 +687,7 @@ the product useful. not make a beautiful art gallery. Design with Purpose.
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        
+
     </script>
 </body>
 

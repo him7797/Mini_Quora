@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>Following</title>
+    <title>Profile</title>
 
     <!-- CSS  -->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -156,11 +156,6 @@
             margin-bottom: 100px;
         }
 
-        .profile_image {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-        }
 
         .sidePanel {
             background-color: #E5E5E5;
@@ -186,64 +181,236 @@
             margin-right: 10px;
         }
 
-        .following_detail {
-            background: #FFFFFF;
-            margin-bottom: 20px;
-            height: 100px;
-            width: 90%;
-            padding-top: 2%;
+
+
+        /* #user_question::-webkit-scrollbar {
+            display: none;
+        } */
+
+
+
+        .profilePanel {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 150px;
+            background-color: #ffffff;
+            margin-right: 0px;
+            border-radius: 4px;
+
         }
 
-        .following_image img {
-            height: 64px;
-            width: 64px;
-            border-radius: 50%;
-        }
-
-        .following_name .user_name {
+        .profilename_span a {
             font-family: Poppins;
             font-style: normal;
             font-weight: normal;
-            font-size: 16px;
-            line-height: 24px;
-            color: #303030;
-        }
-
-        .following_status {
-
-
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: #303030;
-        }
-
-        .following_name .profession {
-            font-family: Poppins;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 18px;
+            font-size: 20px;
+            line-height: 30px;
             /* identical to box height */
 
+            display: flex;
+            align-items: center;
 
+            color: #303030;
+
+        }
+
+        .profilename_span a:hover {
+            text-decoration: none;
+            color: #303030;
+
+        }
+
+        .detail_span a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+            display: flex;
+            align-items: center;
+
+            color: #4E4E4E;
+
+        }
+
+        .detail_span a:hover {
+            text-decoration: none;
             color: #4E4E4E;
         }
 
-        .follow_detail {
-            background: #FFFFFF;
-            margin-bottom: 20px;
-            height: 100px;
-            width: 90%;
-            padding-top: 2%;
+
+        .logout_span a {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+            display: flex;
+            align-items: center;
+
+            color: #FF3B3B;
+
         }
 
-        .follow_image img {
-            height: 40px;
-            width: 40px;
+        .logout_span a:hover {
+            text-decoration: none;
+            color: #FF3B3B;
+        }
+
+
+        .image_span {
+            align-items: center;
+            margin: auto;
+            margin-top: -25px;
+            margin-bottom: 10px;
+        }
+
+        .image_span img {
+            height: 65px;
+            width: 65px;
             border-radius: 50%;
+        }
+
+        .profile_card {
+            height: 280px;
+            width: 90%;
+            margin: 0px 30px;
+            background: url('./assets/cover_photo.png');
+        }
+
+
+        .detail_card {
+            height: 400px;
+            width: 90%;
+            margin: 0px 30px;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile_image {
+            position: absolute;
+            bottom: 10%;
+        }
+
+        .profile_image img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+
+        }
+
+        .profile_details {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            bottom: 15%;
+            left: 12%;
+
+        }
+
+        .profile_name {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 36px;
+            /* identical to box height */
+
+
+            color: #FFFFFF;
+
+        }
+
+        .profile_profession {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height */
+            color: #FEFEFE;
+        }
+
+        .heading_part {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #4E4E4E;
+            margin-bottom: 20px;
+
+        }
+
+        .maindetail {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+
+
+            color: #303030;
+        }
+
+        .dashboard {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #4E4E4E;
+            text-transform: uppercase;
+            margin-top: 30px;
+            margin-bottom: 20px;
+
+        }
+
+        .dashboard_details {
+            height: 200px;
+            width: 60%;
+            background: #FF6666;
+            border-radius: 4px;
+
+        }
+
+        .span_number {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 45px;
+            /* identical to box height */
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .span_tag {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #FEFEFE;
+            text-align: center;
+        }
+
+        .deets
+        {
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -275,9 +442,6 @@
                 <a href="">Following</a>
                 <a href="">Notifications</a>
             </div>
-            <div class="col-2">
-                <a href="Login.html"><button type="button" class="btn add_question">ADD QUESTIONS</button></a>
-            </div>
         </div>
     </nav>
 
@@ -292,71 +456,51 @@
                     <li><img src="assets/bullet.png"> Entertainment</li>
                 </ul>
             </div>
-            <div class="col-1"></div>
-            <div class="col-6 following_panel">
-                <div class="row following_detail">
-                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
-                    <div class="col-6 following_name ">
-                        <span class="user_name">Education</span>
-                        <br>
-                        <span class="profession">3 Posts</span>
-                        <span class="profession">3 Likes</span>
-                    </div>
-                    <div class="col-2">
-                        <span class="following_status">Following</span>
-                    </div>
-                </div>
-                <div class="row following_detail">
-                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
-                    <div class="col-6 following_name ">
-                        <span class="user_name">Education</span>
-                        <br>
-                        <span class="profession">3 Posts</span>
-                        <span class="profession">3 Likes</span>
-                    </div>
-                    <div class="col-2">
-                        <span class="following_status">Following</span>
-                    </div>
-                </div>
-                <div class="row following_detail">
-                    <div class="col-2 following_image"><img src="assets/answer_photo.png"></div>
-                    <div class="col-6 following_name ">
-                        <span class="user_name">Education</span>
-                        <br>
-                        <span class="profession">3 Posts</span>
-                        <span class="profession">3 Likes</span>
-                    </div>
-                    <div class="col-2">
-                        <span class="following_status">Following</span>
-                    </div>
-                </div>
+            <div class="col-8 mainPanel">
+                <div class="row profile_panel">
+                    <div class="card profile_card">
+                        <div class="row card-body">
+                            <div class="col-2 profile_image"><img src="assets/profile.png"></div>
+                            <div class="col-6 profile_details">
+                                <span class="profile_name">Koshal Bothra</span>
+                                <span class="profile_profession">Software Developer</span>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="row detail_panel">
+                    <div class="card detail_card">
+                        <div class="row card-body details">
+                            <span class="heading_part">Other Personal Details</span>
+                            <span class="maindetail">Email:</span>
+                            <span class="maindetail">Date of Birth:</span>
+                            <span class="dashboard">Dashboard</span>
+
+                            <div class="card dashboard_details">
+                                <div class="row card-body">
+                                    <div class="col-6 deets">
+                                        <span class="span_number">80</span>
+                                        <span class="span_tag">Questions Answered</span>
+                                    </div>
+                                    <div class="col-6 deets">
+                                        <span class="span_number">10</span>
+                                        <span class="span_tag">Questions Asked</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="col-3 follow_panel">
-                <div class="row follow_detail">
-                    <div class="col-2 follow_image"><img src="assets/answer_photo.png"></div>
-                    <div class="col-6 following_name ">
-                        <span class="user_name">Education</span>
-                        <br>
-                        <span class="profession">3 Posts</span>
-                        <span class="profession">3 Likes</span>
-                    </div>
-                    <div class="col-2">
-                        <span class="following_status">Follow</span>
-                    </div>
-                </div>
-                <div class="row follow_detail">
-                    <div class="col-2 follow_image"><img src="assets/answer_photo.png"></div>
-                    <div class="col-6 following_name ">
-                        <span class="user_name">Education</span>
-                        <br>
-                        <span class="profession">3 Posts</span>
-                        <span class="profession">3 Likes</span>
-                    </div>
-                    <div class="col-2">
-                        <span class="following_status">Follow</span>
-                    </div>
-                </div>
+            <div class="col-2 profilePanel">
+                <span class="image_span"><img src="assets/profile_panel.png"></span>
+                <span class="profilename_span"><a href="">Koshal Bothra</a></span>
+                <span class="detail_span"><a href="">Edit Details</a></span>
+                <span class="logout_span"><a href="">Logout</a></span>
             </div>
 
         </div>
@@ -370,7 +514,6 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script type="text/javascript">
-        
 
     </script>
 </body>
