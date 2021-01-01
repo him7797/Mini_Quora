@@ -53,13 +53,14 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
             let answerName = answerUser.name;
             let answerProfession=answerUser.about;
             let answerPhoto=answerUser.photo;
-
             let obj;
             obj = {
                 title: posts[i].title,
                 totalAnswers: posts[i].totalAnswers,
                 tags: posts[i].tags,
                 id:posts[i]._id,
+                answerId:answerUser._id,
+                answerIds:posts[i].answers[0].answerId._id,
                 userId:posts[i].postBy._id,
                 postBy: posts[i].postBy.name,
                 postByPhoto:posts[i].postBy.photo,
@@ -121,15 +122,15 @@ Router.get('/',auth,asyncMiddleware(async(req,res)=>{
     for(let k in unique)
     {
         let catInfo=await Category.find({title:unique[k]});
-        console.log(catInfo);
+
         if(catInfo.length===0)
         {
             categories.push({title:unique[k],description:"All About "+`${unique[k]}`+" Posts"});
         }
 
     }
-    let newcat=await Category.insertMany(categories);
-    console.log(newcat);
+    await Category.insertMany(categories);
+
 
 
 res.render('home',{
@@ -264,12 +265,11 @@ Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(asy
     {
         await User.updateOne({email:email},{$set:{photo:Path}});
         let UserInfo={
-            userName:user.name,
-            userEmail:user.email,
-            userDob:user.dob,
-            userProfession:user.about,
-            userPhoto:Path,
-            userPassword:user.password
+            name:user.name,
+            dob:user.dob,
+            email:user.email,
+            profession:user.about,
+            photo:Path,
 
         };
         res.render('Profile',{
@@ -281,21 +281,51 @@ Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(asy
     });
 }));
 
-Router.get('/:id',asyncMiddleware(async(req,res)=>{
+Router.get('/:id',auth,asyncMiddleware(async(req,res)=>{
     let user=await User.findById(req.params.id);
-
+    let currentUser=await User.findById(req.userData.id);
+    let catIds=await Category.find().sort({updatedAt:-1});
+    let catInfo=[];
     let UserInfo={
         userName:user.name,
         userEmail:user.email,
         userDob:user.dob,
         userProfession:user.about,
         userPhoto:user.photo,
-        userPassword:user.password
+        totalPosts:user.posts.length,
+        totalQuestionsAnswered:user.answers.length
 
     };
-    res.render('Profile',{
-        userInfo:UserInfo
+    for(let j in catIds)
+    {
+        catInfo.push(catIds[j].title);
+    }
+    currentUser={
+        currentUser:currentUser.name,
+        currentUserPhoto:currentUser.photo,
+        id: req.userData.id
+    }
+    res.render('profilePage',{
+        userInfo:UserInfo,
+        cat:catInfo,
+        currentUser:currentUser
     })
+}));
+
+Router.get('/editProfile/:id',auth,asyncMiddleware(async(req,res)=>{
+        let user=await User.findById(req.params.id);
+        let obj={
+            name:user.name,
+            dob:user.dob,
+            email:user.email,
+            profession:user.about,
+            photo:user.photo,
+
+        };
+        res.render('Profile',{
+            userInfo:obj
+        });
+
 }));
 
 // Router.post('/forgotPas/byPhone',asyncMiddleware(async(req,res)=>{

@@ -6,6 +6,9 @@ const Post=require('../models/post');
 const User=require('../models/user');
 const asyncMiddleware=require('../middleware/async');
 const auth=require('../middleware/auth');
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+    "July", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
 
 // const entityStorage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -39,29 +42,83 @@ Router.post('/',asyncMiddleware(async(req,res)=>{
   res.send(result);
 }));
 
-Router.get('/by/:title',asyncMiddleware(async(req,res)=>{
+Router.get('/by/:title',auth,asyncMiddleware(async(req,res)=>{
     let cat=await Category.findOne({title:req.params.title});
+    let userInfo=await User.findById(req.userData.id);
+    let catIds=await Category.find().sort({updatedAt:-1});
+    let catInfo=[];
+    let info;
+    if(userInfo.following.length>0)
+    {
+        if(userInfo.following.includes(req.params.title))
+        {
+            info=true;
+        }
+        else
+        {
+            info=false;
+        }
+    }
     let catTitle=cat.title;
-    let posts=await Post.find({tags:{$all:[`${catTitle}`]}}).sort({updatedAt:-1});
-    let obj={
+    let posts=await Post.find({tags:{$all:[`${catTitle}`]}}).sort({updatedAt:-1}).populate('postBy');
+    let catObj={
         title:catTitle,
         description:cat.description,
         followers:cat.followersCount,
-        questions:posts
+        questions:posts,
+        totalPosts:posts.length
+    };
+    let postsInfo=[];
+    for(let i in posts)
+    {
+        let postObj={
+            name:posts[i].postBy.name,
+            profession:posts[i].postBy.about,
+            postByPhoto:posts[i].postBy.photo,
+            title:posts[i].title,
+            id:posts[i]._id,
+            postYear: posts[i].createdAt.getFullYear(),
+            postMonth: monthNames[posts[i].createdAt.getMonth()],
+            postDate: posts[i].createdAt.getDate(),
+            tags: posts[i].tags,
+            totalAnswers: posts[i].totalAnswers,
+            postLike:posts[i].totalLikes,
+        };
+        postsInfo.push(postObj);
     }
-    res.send(obj);
+    userInfo={
+        currentUser:userInfo.name,
+        currentUserPhoto:userInfo.photo,
+        id: req.userData.id
+    };
+    for(let j in catIds)
+    {
+        catInfo.push(catIds[j].title);
+    }
+    res.render('category',{
+        posts:postsInfo,
+        userInfo:userInfo,
+        info:info,
+        catObj:catObj,
+        cat:catInfo
+
+
+    });
+
 }));
 
 //Cat followed by user logged in
-Router.post('/follow/:id',auth,asyncMiddleware(async(req,res)=>{
-    let cat=await Category.findById(req.params.id);
-    let followCount=cat.followersCount+1;
-    cat.followersCount=followCount;
-    await cat.save();
-    let userId=req.userData;
-    let userInfo=await User.findById(userId.id);
-    await User.updateOne({_id:userInfo},{$push:{following:[{followingId:result._id}]}});
-    res.send('Success');
+Router.get('/follow/:title',auth,asyncMiddleware(async(req,res)=>{
+    let cat=req.params.title;
+    let user=req.userData.id;
+    let updateDoc={
+        $addToSet:{
+            following:req.params.title
+        }
+    };
+    await User.updateOne({_id:user},updateDoc);
+    await Category.updateOne({title:cat},{$inc:{followersCount:1}});
+    res.redirect('/api/users/');
 
 }));
 

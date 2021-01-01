@@ -15,6 +15,16 @@ html(lang='en')
                 background-color: #E5E5E5;
             ;
             }
+
+             a {
+                text-decoration: none;
+
+            }
+
+            a:hover {
+                text-decoration: none;
+
+            }
             .form-control:focus {
                 border-style: groove;
                 border-color: #FF3B3B;
@@ -149,6 +159,16 @@ html(lang='en')
             }
             .sidePanel img {
                 margin-right: 10px;
+            }
+
+            .sidePanel a {
+                text-decoration: none;
+                color: #303030;
+            }
+
+            .sidePanel a:hover {
+                text-decoration: none;
+                color: #303030;
             }
             /* #user_question::-webkit-scrollbar {
             display: none;
@@ -406,6 +426,18 @@ html(lang='en')
                 margin-left: 10px;
             }
 
+            .upvote_buttons a {
+                text-decoration: none;
+                color: #303030;
+
+            }
+
+            .upvote_buttons a:hover {
+                text-decoration: none;
+                color: #303030;
+
+            }
+
             .post_answer {
                 width: 100px;
                 height: 34px;
@@ -465,8 +497,8 @@ html(lang='en')
                 .col-1
                 .col-3.links
                     a.active(href='/api/users/') Home
-                    a(href='') Following
-                    a(href='') Notifications
+                    a.active(href='/api/notifications/following') Following
+                    a.active(href='/api/notifications/') Notifications
 
         .container-fluid
             .row.mainBody
@@ -498,11 +530,9 @@ html(lang='en')
                                     span= `${posts.totalAnswers}` + " Answers"
                                 .row.upvote_buttons
                                     span
-                                        img(src='/public/up-arrow.png')
-                                        |  Upvote
-                                    span
-                                        img(src='/public/down-arrow.png')
-                                        |  Downvote
+                                        a(href='/api/posts/like/' + posts.id)
+                                            img(src='/public/up-arrow.png')
+                                            |  Upvote
                                     span
                                         img(src='/public/chat.png')
                                         |  Answer
@@ -524,11 +554,9 @@ html(lang='en')
                                         span= `${val.totalLikes}` + " Upvotes"
                                     .row.upvote_buttons
                                         span
-                                            img(src='/public/up-arrow.png')
-                                            |  Upvote
-                                        span
-                                            img(src='/public/down-arrow.png')
-                                            |  Downvote
+                                            a(href='/api/answers/like/' + val.answerId)
+                                                img(src='/public/up-arrow.png')
+                                                |  Upvote
 
 
 
@@ -546,7 +574,7 @@ html(lang='en')
                     span.profilename_span
                         a(href="/api/users/" + userInfo.id)=userInfo.currentUser
                     span.detail_span
-                        a(href="/api/users/" + userInfo.id) Edit Details
+                        a(href="/api/users/editProfile/"+userInfo.id) Edit Details
                     span.logout_span
                         a(href='/api/users/logout') Logout
         // Scripts

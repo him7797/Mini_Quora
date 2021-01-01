@@ -4,9 +4,7 @@
 
 
 
+helper
+helper/*
 
-config
-node_modules
-node_modules/*
-public
-public/*
+

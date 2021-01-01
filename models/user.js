@@ -54,12 +54,9 @@ const User = mongoose.Schema({
     bookmark:{
         type:Array
     },
-    following:[{
-        followingId:{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'Category'
-        }
-    }]
+    following:{
+        type:Array
+    }
   },{timestamps: true});
 
 

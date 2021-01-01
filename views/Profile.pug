@@ -133,6 +133,8 @@ html(lang='en')
                 margin-bottom: 100px;
 
             }
+
+
             .mainPanel {
                 background: #FFFFFF;
                 border: 1px solid #EFEFEF;
@@ -215,8 +217,8 @@ html(lang='en')
                 .col-1
                 .col-3.links
                     a.active(href='/api/users/') Home
-                    a(href='') Following
-                    a(href='') Notifications
+                    a.active(href='/api/notifications/following') Following
+                    a.active(href='/api/notifications/') Notifications
 
         .container-fluid
             .row.mainBody
@@ -224,7 +226,7 @@ html(lang='en')
                 .col-6.mainPanel
                     br
                     span.image_span
-                        img(src=`${userInfo.userPhoto}`,alt='Avatar',class="avatar")
+                        img(src=`${userInfo.photo}`,alt='Avatar',class="avatar")
                     span.edit_span(data-toggle='modal' data-target='#exampleModal')
                         | Edit Profile
                         | Picture
@@ -249,17 +251,17 @@ html(lang='en')
                             form(method='POST', action='/api/users/change-password-email')
                                 div.form-group
                                     label Name
-                                    input.form-control(name='name',type='text',placeholder=`${userInfo.userName}`)
+                                    input.form-control(name='name',type='text',placeholder=`${userInfo.name}`)
                                 div.form-group
                                     label Email address
-                                    input.form-control(name='email',type='email' aria-describedby='emailHelp',placeholder=`${userInfo.userEmail}`)
+                                    input.form-control(name='email',type='email' aria-describedby='emailHelp',placeholder=`${userInfo.email}`)
                                 div.form-group
                                     label Date of Birth
                                     br
-                                    input.form-control(type='text' name='dob',placeholder=`${userInfo.userDob}`)
+                                    input.form-control(type='text' name='dob',placeholder=`${userInfo.dob}`)
                                 div.form-group
                                     label Profession
-                                    input.form-control(name='profession',type='text',placeholder=`${userInfo.userProfession}`)
+                                    input.form-control(name='profession',type='text',placeholder=`${userInfo.profession}`)
                                 div.form-group
                                     label Old Password
                                     input.form-control(name='oldPas',type='password')

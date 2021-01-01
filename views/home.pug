@@ -15,6 +15,7 @@ html(lang='en')
                 background-color: #E5E5E5;
             ;
             }
+
             .form-control:focus {
                 border-style: groove;
                 border-color: #FF3B3B;
@@ -146,6 +147,16 @@ html(lang='en')
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                color: #303030;
+            }
+
+            .sidePanel a {
+                text-decoration: none;
+                color: #303030;
+            }
+
+            .sidePanel a:hover {
+                text-decoration: none;
                 color: #303030;
             }
             .sidePanel ul li {
@@ -437,6 +448,18 @@ html(lang='en')
                 margin-top: 10px;
                 margin-left: 10px;
             }
+
+            .upvote_buttons a {
+                text-decoration: none;
+                color: #303030;
+
+            }
+
+            .upvote_buttons a:hover {
+                text-decoration: none;
+                color: #303030;
+
+            }
             .user_answer {
                 font-family: Poppins;
                 font-style: normal;
@@ -448,6 +471,7 @@ html(lang='en')
                 margin-top: 20px;
                 margin-left: 2px;
             }
+
             .user_answer textarea::-webkit-scrollbar {
                 display: none;
             }
@@ -473,8 +497,8 @@ html(lang='en')
                 .col-1
                 .col-3.links
                     a.active(href='/api/users/') Home
-                    a(href='') Following
-                    a(href='') Notifications
+                    a.active(href='/api/notifications/following') Following
+                    a.active(href='/api/notifications/') Notifications
         .container-fluid
             .row.mainBody
                 .col-2.sidePanel
@@ -515,8 +539,8 @@ html(lang='en')
                                         br
                                         br
                                     .col-9.answer_name
-                                        a(href='/api/users/:id'+val.userId)
-                                         span.asked_by=`${val.postBy}`
+                                        a(href='/api/users/'+val.userId)
+                                            span.asked_by=`${val.postBy}`
                                         span.profession=`${val.profession}`
                                     .col-2.date_of_submission=`${val.postDate}`+" "+`${val.postMonth}`+" "+`${val.postYear}`
                                 .row.question_asked
@@ -530,11 +554,10 @@ html(lang='en')
                                         span= `${val.totalAnswers}` + " Answers"
                                 .row.upvote_buttons
                                     span
-                                        img(src='/public/up-arrow.png')
-                                        |  Upvote
-                                    span
-                                        img(src='/public/down-arrow.png')
-                                        |  Downvote
+                                        a(href='/api/posts/like/' + val.id)
+                                            img(src='/public/up-arrow.png')
+                                            |  Upvote
+
                                     span
                                         img(src='/public/chat.png')
                                         |  Answer
@@ -545,7 +568,8 @@ html(lang='en')
                                           img(src=`${val.answerPhoto}`,class="profile_image")
 
                                       .col-9.answer_name
-                                          span.asked_by=`${val.answerName}`
+                                          a(href='/api/users/'+val.answerId)
+                                              span.asked_by=`${val.answerName}`
                                           span.profession=`${val.answerProfession}`
                                       .col-2.date_of_submission=`${val.answerDate}`+" "+`${val.answerMonth}`+" "+`${val.answerYear}`
                                   pre.question_detail=`${val.description}`
@@ -553,11 +577,10 @@ html(lang='en')
                                       span= `${val.totalLikes}` + " Upvotes"
                                   .row.upvote_buttons
                                       span
-                                          img(src='/public/up-arrow.png')
-                                          |  Upvote
-                                      span
-                                          img(src='/public/down-arrow.png')
-                                          |  Downvote
+                                          a(href='/api/answers/like/' + val.answerIds)
+                                             img(src='/public/up-arrow.png')
+                                             |  Upvote
+
 
                                   .row.user_answer
                                       span
@@ -586,7 +609,7 @@ html(lang='en')
                     span.profilename_span
                         a(href="/api/users/"+userInfo.id)=userInfo.currentUser
                     span.detail_span
-                        a(href="/api/users/"+userInfo.id) Edit Details
+                        a(href="/api/users/editProfile/"+userInfo.id) Edit Details
                     span.logout_span
                         a(href='/api/users/logout') Logout
         // Scripts

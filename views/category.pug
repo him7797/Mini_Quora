@@ -1,0 +1,539 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
+        title Category
+        // CSS
+        link(href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet')
+        link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+        link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+        link(rel='icon',type='image/png',sizes='16x16',href="/public/WEB LOGO.png")
+        style.
+            body {
+                background-color: #E5E5E5;
+            ;
+            }
+            .form-control:focus {
+                border-style: groove;
+                border-color: #FF3B3B;
+                box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+            }
+            .navbar {
+                background-color: #FFFFFF !important;
+                height: 50px;
+            }
+            nav a {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 27px;
+                color: #303030;
+            }
+            nav a:hover {
+                text-decoration: none;
+                color: inherit;
+            }
+            .links .active {
+                color: #FF3B3B;
+            }
+            .links .active:hover {
+                color: #FF3B3B;
+            }
+            .add_question {
+                background: #FF3C3C;
+                border-radius: 2px !important;
+                font-family: Poppins;
+                font-style: normal;
+                font-size: 17px;
+                line-height: 20px;
+                text-transform: uppercase;
+                text-align: center;
+                color: #FFFFFF;
+                float: right;
+            }
+            .add_question:hover {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            .navbar-brand {
+                font-family: Merriweather;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 30px;
+                color: #FF3B3B !important;
+                margin-right: 100px;
+            }
+            .searchbar {
+                width: 550px;
+                height: 33px;
+                border: 1px solid #EFEFEF;
+                box-sizing: border-box;
+                box-shadow: 0px 0px;
+                margin-right: 100%;
+            }
+            .searchbar input {
+                width: 550px;
+                height: 33px;
+                background: #FFFFFF;
+                border: 1px solid #EFEFEF;
+                box-sizing: border-box;
+                box-shadow: 0px 0px;
+            }
+            .search_button {
+                background: #FF3B3B;
+                height: 33px;
+                align-items: center;
+                text-align: center !important;
+                border: 1px solid #EFEFEF;
+                box-sizing: border-box;
+                box-shadow: 0px 0px;
+            }
+            .search_button:hover {
+                background: #FF3B3B;
+            }
+            .searchbar .form-control:focus {
+                border-color: #FF3B3B;
+                box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+            }
+            .searchbar i {
+                color: #FFFFFF;
+                align-items: center !important;
+            }
+            .material-icons {
+                display: flex;
+                line-height: 0.9px;
+                text-align: center;
+            }
+            .links {
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                margin: 0;
+            }
+            .navbar_elements {
+                display: flex;
+                justify-content: space-between;
+            }
+            .container-fluid {
+                margin-top: 30px;
+            }
+            .mainBody {
+                width: 100%;
+                height: 100%;
+                margin-bottom: 100px;
+            }
+            .sidePanel {
+                background-color: #E5E5E5;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 21px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #303030;
+            }
+
+            .sidePanel a {
+                text-decoration: none;
+                color: #303030;
+            }
+
+            .sidePanel a:hover {
+                text-decoration: none;
+                color: #303030;
+            }
+
+            .links {
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                margin-right: 30px;
+            }
+
+            .links a {
+
+                margin-right: 30px;
+            }
+            .sidePanel ul li {
+                list-style-type: none;
+                margin-bottom: 20px;
+            }
+            .sidePanel img {
+                margin-right: 10px;
+            }
+            /* #user_question::-webkit-scrollbar {
+            display: none;
+            } */
+            .profilePanel {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                height: 150px;
+                background-color: #ffffff;
+                margin-right: 0px;
+                border-radius: 4px;
+            }
+            .profilename_span a {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 30px;
+                /* identical to box height */
+                display: flex;
+                align-items: center;
+                color: #303030;
+            }
+            .profilename_span a:hover {
+                text-decoration: none;
+                color: #303030;
+            }
+            .detail_span a {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 21px;
+                /* identical to box height */
+                display: flex;
+                align-items: center;
+                color: #4E4E4E;
+            }
+            .detail_span a:hover {
+                text-decoration: none;
+                color: #4E4E4E;
+            }
+            .logout_span a {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 21px;
+                /* identical to box height */
+                display: flex;
+                align-items: center;
+                color: #FF3B3B;
+            }
+            .logout_span a:hover {
+                text-decoration: none;
+                color: #FF3B3B;
+            }
+            .image_span {
+                align-items: center;
+                margin: auto;
+                margin-top: -25px;
+                margin-bottom: 10px;
+            }
+            .image_span img {
+                height: 65px;
+                width: 65px;
+                border-radius: 50%;
+            }
+            .profile_card {
+                height: 280px;
+                width: 100%;
+                margin: 0px 30px;
+                background: url('/public/cover_photo.png');
+            }
+            .detail_card {
+                height: 150px;
+                width: 100%;
+                margin: 0px 30px;
+            }
+            .details {
+                display: flex;
+                flex-direction: column;
+            }
+            .profile_image img {
+                height: 80px;
+                width: 80px;
+                border-radius: 50%;
+            }
+            .category_details {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                bottom: 15%;
+            }
+            .category_name {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 36px;
+                /* identical to box height */
+                color: #FFFFFF;
+            }
+            .labelclass
+            {
+                font-family: Poppins;
+                font-style: normal;
+                font-size: 15px;
+                line-height: 36px;
+                /* identical to box height */
+                color: #FFFFFF;
+            }
+            .category_count {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+                color: #FEFEFE;
+            }
+            .follow_button {
+                width: 90px;
+                height: 35px;
+                background: #FF8C8C;
+                border-radius: 4px;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                /* identical to box height */
+                color: #FFFFFF;
+                margin-top: 10px;
+            }
+            .heading_part {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 21px;
+                /* identical to box height */
+                color: #4E4E4E;
+                margin-bottom: 20px;
+            }
+            .maindetail {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 21px;
+                color: #303030;
+            }
+            .answer_panel {
+                width: 100%;
+                padding-top: 20px;
+                margin: 0;
+            }
+            .answer_card {
+                background: #FFFFFF;
+                border: 1px solid #EFEFEF;
+                box-sizing: border-box;
+                border-radius: 4px;
+                width: 100% !important;
+            }
+            .answer_name {
+                display: flex;
+                flex-direction: column;
+            }
+            .asked_by {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+                color: #303030;
+            }
+            .profession {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 18px;
+                /* identical to box height */
+                color: #4E4E4E;
+            }
+            .date_of_submission {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 18px;
+                /* identical to box height */
+                color: #3E3E3E;
+            }
+            .answer_image img {
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+            }
+            .profile_image
+            .question_asked {
+                padding: 20px 5px;
+                overflow: scroll;
+            }
+            .question_asked::-webkit-scrollbar {
+                display: none;
+            }
+            .question_headline {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                color: #303030;
+                flex: none;
+                order: 0;
+                align-self: flex-start;
+                flex-grow: 0;
+                margin: 0px 16px;
+            }
+            .tags_used span {
+                background: #FFFFFF;
+                border: 1px solid #FF3B3B;
+                box-sizing: border-box;
+                border-radius: 24px;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 21px;
+                /* identical to box height */
+                letter-spacing: -0.165px;
+                color: #FF3B3B;
+                margin-top: 10px;
+                margin-left: 16px;
+            }
+            .upvote_details span {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+                letter-spacing: -0.165px;
+                color: #303030;
+                margin-top: 15px;
+                margin-left: 17px;
+            }
+
+            .upvote_details a {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+                letter-spacing: -0.165px;
+                color: #303030;
+                margin-top: 15px;
+                text-transform: none;
+            }
+
+            .upvote_details a:hover {
+                text-decoration: none;
+                color: #303030;
+            }
+            .upvote_buttons span {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: -0.165px;
+                color: #303030;
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+    body
+        nav.navbar
+            .row.navbar_elements
+                .col-2
+                    a.navbar-brand(href='#')
+                        | Mini-Quora
+                .col-4
+                    .searchbar
+                        .input-group
+                            input.form-control(type='search' placeholder='Search any question running in your mind.....')
+                            .input-group-append
+                                button.btn.search_button(type='button')
+                                    i.material-icons search
+                .col-1
+                .col-3.links
+                    a.active(href='/api/users/') Home
+                    a.active(href='/api/notifications/following') Following
+                    a.active(href='/api/notifications/') Notifications
+        .container-fluid
+            .row.mainBody
+                .col-2.sidePanel
+                    ul
+                        each val in cat
+                            li
+                                a(href='/api/category/by/' + val)
+                                    img(src='/public/bullet.png')
+                                    label=val
+                .col-8.mainPanel
+                    .row.profile_panel
+                        .card.profile_card
+                            .row.card-body
+                                .col-6.category_details
+                                    span.category_name=`${catObj.title}`
+                                    span.category_count=`${catObj.followers}`+" "+"Followers | "+`${catObj.totalPosts}`+" Posts"
+                                    if info==true
+                                        label.labelclass Following
+                                    else
+                                        a(href='/api/category/follow/'+catObj.title)
+                                              button.btn.follow_button(type='button') Follow
+
+                    .row.detail_panel
+                        .card.detail_card
+                            .row.card-body.details
+                                span.heading_part Description
+                                span.maindetail=`${catObj.description}`
+
+                    .row.answer_panel
+                        each item in posts
+                            hr
+                            .card.answer_card
+                                .card-body
+                                    .row.asking_user_details
+                                        .col-1.answer_image
+                                            img(src=`${item.postByPhoto}`,class="profile_image")
+                                        .col-9.answer_name
+                                            span.asked_by=`${item.name}`
+                                            span.profession=`${item.profession}`
+                                        .col-2.date_of_submission=`${item.postDate}`+" "+`${item.postMonth}`+" "+`${item.postYear}`
+                                    .row.question_asked
+                                        span.question_headline=`${item.title}`
+                                    .row.tags_used
+                                        each Tags in item.tags
+                                            span.badge=`${Tags}`
+                                    .row.upvote_details
+                                        span= `${item.postLike}` + " Upvotes"
+                                        a(href='/api/posts/' + item.id)
+                                              span= `${item.totalAnswers}` + " Answers"
+                                    .row.upvote_buttons
+                                        span
+                                            a(href='/api/posts/like/' + item.id)
+                                                img(src='/public/up-arrow.png')
+                                                |  Upvote
+                                        span
+                                            img(src='/public/chat.png')
+                                            |  Answer
+
+
+                .col-2.profilePanel
+                    span.image_span
+                        img(src=`${userInfo.currentUserPhoto}`,class="user_image")
+                    span.profilename_span
+                        a(href="/api/users/" + userInfo.id)=userInfo.currentUser
+                    span.detail_span
+                        a(href="/api/users/editProfile/"+userInfo.id) Edit Details
+                    span.logout_span
+                        a(href='/api/users/logout') Logout
+        // Scripts
+        script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+        script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+        script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
+        script(type='text/javascript').

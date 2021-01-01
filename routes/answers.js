@@ -36,9 +36,10 @@ Router.post('/:id',auth,asyncMiddleware(async(req,res)=>{
    res.redirect('/api/users/');
 }));
 
-Router.put('/like/:id',asyncMiddleware(async(req,res)=>{
-    let userId=req.body.id;
+Router.get('/like/:id',auth,asyncMiddleware(async(req,res)=>{
+    let userId=req.userData.id;
     let ansId=req.params.id;
+    console.log(req.params.id);
     let checkLike=await Answer.find({$and:[{_id:ansId},{"likesBy.likedBy":userId},{"likesBy.likeStatus":true}]});
     console.log(checkLike);
     if(checkLike.length>0) return res.status(409).json({
@@ -62,10 +63,7 @@ Router.put('/like/:id',asyncMiddleware(async(req,res)=>{
 
         };
         await Answer.updateOne({_id:ansId},obj);
-        return res.status(409).json({
-            status: "Success",
-            message: 'Answer Liked'
-        });
+        res.redirect('/api/users/');
     }
   
 }));

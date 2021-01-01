@@ -87,6 +87,7 @@ let allAnswers=[];
                     answerName: answerName,
                     answerProfession:answerProfession,
                     answerPhoto:answerPhoto,
+                    answerId:posts.answers[i].answerId._id,
                     totalLikes: posts.answers[i].answerId.totalLikes,
                     description: posts.answers[i].answerId.description,
                     answerYear:posts.answers[i].answerId.createdAt.getFullYear(),
@@ -143,8 +144,8 @@ Router.delete('/:id',asyncMiddleware(async(req,res)=>{
     });
 }));
 
-Router.post('/like/:id',asyncMiddleware(async(req,res)=>{
-    let userId=req.body.id;
+Router.get('/like/:id',auth,asyncMiddleware(async(req,res)=>{
+    let userId=req.userData.id;
     let postId=req.params.id;
     let checkLike=await Post.find({$and:[{_id:postId},{"likesBy.likedBy":userId},{"likesBy.likeStatus":true}]});
     console.log(checkLike);
@@ -155,8 +156,6 @@ Router.post('/like/:id',asyncMiddleware(async(req,res)=>{
     else
     {
         let obj;
-        let totalLikes=await Post.findById(postId);
-        totalLikes=totalLikes.totalLikes;
         obj={
             $addToSet:{
                 likesBy:{
@@ -165,15 +164,12 @@ Router.post('/like/:id',asyncMiddleware(async(req,res)=>{
                     likeStatus:true
                 },
             },
-            $set:{
-                totalLikes:totalLikes+1
+            $inc:{
+                totalLikes:1
             }
         };
         await Post.updateOne({_id:postId},obj);
-        return res.status(409).json({
-            status: "Success",
-            message: 'Post Liked'
-        });
+        res.redirect('/api/users/');
     }
 }));
 
