@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73c17bdc-f38b-4dbf-ae5e-a9ebdfbb3792" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/views/category.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/following.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/notification.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/profilePage.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/answers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/answers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/notification.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/notification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/otp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/Profile.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/Profile.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/answer.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/answer.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.pug" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +30,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.15.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.19.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Shopay/harbor" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Assignment" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -132,65 +121,21 @@
       <workItem from="1609215757446" duration="34761000" />
       <workItem from="1609301096134" duration="7702000" />
       <workItem from="1609386403439" duration="1626000" />
-      <workItem from="1609470877782" duration="758000" />
+      <workItem from="1609470877782" duration="4538000" />
+      <workItem from="1609601287198" duration="1580000" />
+      <workItem from="1609613456908" duration="1259000" />
+      <workItem from="1609658653899" duration="2139000" />
+      <workItem from="1609669927937" duration="5833000" />
+      <workItem from="1609787362863" duration="730000" />
+      <workItem from="1609835465077" duration="693000" />
+      <workItem from="1610613935021" duration="2652000" />
+      <workItem from="1610617691562" duration="2470000" />
+      <workItem from="1610694382684" duration="1228000" />
+      <workItem from="1610778571667" duration="3472000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="309" y="47" key="#Inspections" timestamp="1606501449688">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="309" y="47" key="#Inspections/0.0.1366.738@0.0.1366.738" timestamp="1606501449688" />
-    <state x="137" y="24" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606036091287">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="137" y="24" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1606036091287" />
-    <state x="352" y="147" key="EditFileWatcherDialog" timestamp="1606396184406">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="352" y="147" key="EditFileWatcherDialog/0.0.1366.738@0.0.1366.738" timestamp="1606396184406" />
-    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1608657111476">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1608657111476" />
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom" timestamp="1609393082292">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1609393082292" />
-    <state width="1877" height="421" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1366.738@0.0.1920.1050" timestamp="1608385652809" />
-    <state width="1877" height="100" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1608407019120" />
-    <state width="1323" height="180" key="GridCell.Tab.0.center" timestamp="1609393082292">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1609393082292" />
-    <state width="1877" height="421" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1366.738@0.0.1920.1050" timestamp="1608385652809" />
-    <state width="1877" height="100" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1608407019120" />
-    <state width="1323" height="180" key="GridCell.Tab.0.left" timestamp="1609393082292">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1609393082292" />
-    <state width="1877" height="421" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1366.738@0.0.1920.1050" timestamp="1608385652808" />
-    <state width="1877" height="100" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1608407019120" />
-    <state width="1323" height="180" key="GridCell.Tab.0.right" timestamp="1609393082292">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1323" height="180" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1609393082292" />
-    <state width="1877" height="421" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1366.738@0.0.1920.1050" timestamp="1608385652809" />
-    <state width="1877" height="100" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1608407019120" />
-    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1608407020644">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="92" y="92" width="1182" height="554" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.738@0.0.1366.738" timestamp="1608357288894" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1608568657646">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1608568657646" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1607477050578">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1607477050578" />
   </component>
 </project>

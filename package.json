@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
+  "engines": {
+    "node": "12.15.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/him7797/Mini_Quora.git"
