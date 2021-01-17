@@ -3,8 +3,6 @@
 
 
 
-
-helper
-helper/*
+node_modules/
 
 
