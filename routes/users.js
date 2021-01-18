@@ -18,7 +18,7 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
 //Setting up multer for photo upload
 const entityStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/');// check for correct permission
+    cb(null, 'uploads/');// check for correct permission
   },
   filename: (req, file, cb) => {
     const name = file.originalname;
