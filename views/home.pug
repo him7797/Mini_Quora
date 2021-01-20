@@ -513,7 +513,7 @@ html(lang='en')
                         .card.question_card
                             .row.card-body
                                 .col-2.profile_image
-                                    img(src=`${userInfo.currentUserPhoto}`,alt='Avatar',class="profile_image")
+                                    img(src="/api/users/image/"+`${userInfo.currentUserPhoto}`,alt='Avatar',class="profile_image")
                                 .col-10.profile_name
                                     form(method='POST',action='/api/posts/')
                                       div.form-group
@@ -535,7 +535,7 @@ html(lang='en')
                             .card-body
                                 .row.asking_user_details
                                     .col-1.answer_image
-                                        img(src=`${val.postByPhoto}`,class="profile_image")
+                                        img(src="/api/users/image/"+`${val.postByPhoto}`,class="profile_image")
                                         br
                                         br
                                     .col-9.answer_name
@@ -565,7 +565,7 @@ html(lang='en')
                                 if val.answerPhoto
                                   .row.answer_user_details
                                       .col-1.answer_image
-                                          img(src=`${val.answerPhoto}`,class="profile_image")
+                                          img(src="/api/users/image/"+`${val.answerPhoto}`,class="profile_image")
 
                                       .col-9.answer_name
                                           a(href='/api/users/'+val.answerId)
@@ -584,7 +584,7 @@ html(lang='en')
 
                                   .row.user_answer
                                       span
-                                          img.user_image(src=`${userInfo.currentUserPhoto}`)
+                                          img.user_image(src="/api/users/image/"+`${userInfo.currentUserPhoto}`)
                                       .col-10
                                           form(method='POST',action='/api/answers/'+val.id)
                                            div.post_ans.form-group
@@ -596,7 +596,7 @@ html(lang='en')
                                     pre.question_detail=`${val.description}`
                                     .row.user_answer
                                         span
-                                            img.user_image(src=`${userInfo.currentUserPhoto}`)
+                                            img.user_image(src="/api/users/image/"+`${userInfo.currentUserPhoto}`)
                                         .col-10
                                             form(method='POST',action='/api/answers/'+val.id)
                                                 div.post_ans.form-group
@@ -605,7 +605,7 @@ html(lang='en')
 
                 .col-2.profilePanel
                     span.image_span
-                        img(src=`${userInfo.currentUserPhoto}`,class="user_image")
+                        img(src="/api/users/image/"+`${userInfo.currentUserPhoto}`,class="user_image")
                     span.profilename_span
                         a(href="/api/users/"+userInfo.id)=userInfo.currentUser
                     span.detail_span

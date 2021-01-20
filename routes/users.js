@@ -11,22 +11,52 @@ const asyncMiddleware=require('../middleware/async');
 const jwt=require('jsonwebtoken');
 const localstorage=require('local-storage');
 const auth=require('../middleware/auth');
+const crypto = require('crypto');
+const mongoose = require('mongoose');
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
     "July", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+
 
 //Setting up multer for photo upload
-const entityStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');// check for correct permission
-  },
-  filename: (req, file, cb) => {
-    const name = file.originalname;
-    cb(null,  name);
-  }
+const mongoURI = 'mongodb+srv://Himanshu:HIM101hi@miniquora.ztdid.mongodb.net/Uploads?retryWrites=true&w=majority';
+
+// Create mongo connection
+const conn = mongoose.createConnection(mongoURI);
+
+// Init gfs
+let gfs;
+
+conn.once('open', () => {
+    // Init stream
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('uploads');
 });
 
-const upload = multer({storage: entityStorage});
+// Create storage engine
+const storage = new GridFsStorage({
+    url: mongoURI,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + file.originalname;
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'uploads'
+                };
+                resolve(fileInfo);
+            });
+        });
+    }
+});
+const upload = multer({ storage });
+
+
 
 
 //Rendering the Signup page
@@ -213,7 +243,7 @@ Router.get('/logout',asyncMiddleware(async(req,res)=>{
 
 Router.get('/profilePic',asyncMiddleware(async(req,res)=>{
     res.render('uploadProfilePic');
-}))
+}));
 
 //change password using email route
 Router.post('/change-password-email',auth,asyncMiddleware(async(req,res)=>{
@@ -250,15 +280,16 @@ Router.post('/change-password-email',auth,asyncMiddleware(async(req,res)=>{
 }));
 
 //Changing profile pic
-Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(async(req,res)=>{
+Router.post('/change/ProfilePic',auth,upload.single('file'),asyncMiddleware(async(req,res)=>{
     let email=req.userData.email;
     // let userInfo=req.body.email;
     let id=req.userData.id;
     let user=await User.findById(id);
-    let Path=req.file.path;
-    Path=Path.replace(/\\/g,"/");
-    Path='/'.concat(Path);
-    console.log(Path);
+    let Path=req.file.filename;
+    // Path=Path.replace(/\\/g,"/");
+    // Path='/'.concat(Path);
+    // console.log(Path);
+
     if(email)
     {
         await User.updateOne({email:email},{$set:{photo:Path}});
@@ -278,7 +309,13 @@ Router.post('/change/ProfilePic',auth,upload.single('photo'),asyncMiddleware(asy
          'message':"User with given email not found"
     });
 }));
-
+Router.get('/image/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+     
+  });
+});
 Router.get('/:id',auth,asyncMiddleware(async(req,res)=>{
     let user=await User.findById(req.params.id);
     let currentUser=await User.findById(req.userData.id);
