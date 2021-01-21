@@ -485,7 +485,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -496,7 +496,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='/api/users/') Home
+                    a.active(href='/home') Home
                     a.active(href='/api/notifications/following') Following
                     a.active(href='/api/notifications/') Notifications
 
@@ -515,7 +515,7 @@ html(lang='en')
                             .card-body
                                 .row.asking_user_details
                                     .col-1.answer_image
-                                        img(src=`${posts.postByPhoto}`,class="profile_image")
+                                        img(src="/api/users/image/"+`${posts.postByPhoto}`,class="profile_image")
                                     .col-9.answer_name
                                         span.asked_by=`${posts.postBy}`
                                         span.profession=`${posts.profession}`
@@ -542,7 +542,7 @@ html(lang='en')
                                     .row.answer_user_details
 
                                         .col-1.answer_image
-                                            img(src=`${val.answerPhoto}`,class="profile_image")
+                                            img(src="/api/users/image/"+`${val.answerPhoto}`,class="profile_image")
                                         .col-9.answer_name
                                             span.asked_by=`${val.answerName}`
                                             span.profession=`${val.answerProfession}`
@@ -562,7 +562,7 @@ html(lang='en')
 
                                 .row.user_answer
                                     span
-                                        img.user_image(src=`${userInfo.currentUserPhoto}`)
+                                        img.user_image(src="/api/users/image/"+`${userInfo.currentUserPhoto}`)
                                     .col-10
                                         form(method='POST',action='/api/answers/' + posts.id)
                                             div.post_ans.form-group
@@ -570,7 +570,7 @@ html(lang='en')
                                                 button.btn.post_answer(type='submit') Post Answer
                 .col-2.profilePanel
                     span.image_span
-                        img(src=`${userInfo.currentUserPhoto}`,class="user_image")
+                        img(src="/api/users/image/"+`${userInfo.currentUserPhoto}`,class="user_image")
                     span.profilename_span
                         a(href="/api/users/" + userInfo.id)=userInfo.currentUser
                     span.detail_span

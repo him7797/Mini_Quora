@@ -450,7 +450,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -461,7 +461,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='/api/users/') Home
+                    a.active(href='/home') Home
                     a.active(href='/api/notifications/following') Following
                     a.active(href='/api/notifications/') Notifications
         .container-fluid
@@ -499,7 +499,7 @@ html(lang='en')
                                 .card-body
                                     .row.asking_user_details
                                         .col-1.answer_image
-                                            img(src=`${item.postByPhoto}`,class="profile_image")
+                                            img(src="/api/users/image/"+`${item.postByPhoto}`,class="profile_image")
                                         .col-9.answer_name
                                             span.asked_by=`${item.name}`
                                             span.profession=`${item.profession}`
@@ -525,7 +525,7 @@ html(lang='en')
 
                 .col-2.profilePanel
                     span.image_span
-                        img(src=`${userInfo.currentUserPhoto}`,class="user_image")
+                        img(src="/api/users/image/"+`${userInfo.currentUserPhoto}`,class="user_image")
                     span.profilename_span
                         a(href="/api/users/" + userInfo.id)=userInfo.currentUser
                     span.detail_span

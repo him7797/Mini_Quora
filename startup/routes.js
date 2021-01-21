@@ -4,6 +4,7 @@ const posts=require('../routes/posts');
 const category=require('../routes/category');
 const bodyParser = require('body-parser');
 const notification=require('../routes/notification');
+const home=require('../routes/home');
 
 module.exports=function(app){
     app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,6 +12,7 @@ module.exports=function(app){
     app.use('/api/users',user);
     app.use('/api/posts',posts);
     app.use('/api/answers',answer);
+    app.use('/',home);
     app.use('/api/category',category);
     app.use('/api/notifications',notification);
 }

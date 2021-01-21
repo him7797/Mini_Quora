@@ -350,7 +350,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -378,7 +378,7 @@ html(lang='en')
                         .card.profile_card
                             .row.card-body
                                 .col-2.profile_image
-                                    img(src=`${userInfo.userPhoto}`)
+                                    img(src="/api/users/image/"+`${userInfo.userPhoto}`)
                                 .col-6.profile_details
                                     span.profile_name=`${userInfo.userName}`
                                     span.profile_profession=`${userInfo.userProfession}`
@@ -405,7 +405,7 @@ html(lang='en')
                                             span.span_tag Questions Asked
                 .col-2.profilePanel
                     span.image_span
-                        img(src=`${currentUser.currentUserPhoto}`,class="user_image")
+                        img(src="/api/users/image/"+`${currentUser.currentUserPhoto}`,class="user_image")
                     span.profilename_span
                         a(href="/api/users/" + currentUser.id)=currentUser.currentUser
                     span.detail_span

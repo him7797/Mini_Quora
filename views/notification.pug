@@ -411,7 +411,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -422,7 +422,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='/api/users/') Home
+                    a.active(href='/home') Home
                     a.active(href='/api/notifications/following') Following
                     a.active(href='/api/notifications/') Notifications
 
@@ -440,12 +440,12 @@ html(lang='en')
                         each item in allInfo
                           .notify_panel
                               .notification_image
-                                  img(src=`${item.photo}`)
+                                  img(src="/api/users/image/"+`${item.photo}`)
                               .notification_detail=`${item.name}`+" "+`${item.description}`
 
                 .col-2.profilePanel
                     span.image_span
-                        img(src=`${userInfo.currentUserPhoto}`,class="user_image")
+                        img(src="/api/users/image/"+`${userInfo.currentUserPhoto}`,class="user_image")
                     span.profilename_span
                         a(href="/api/users/" + userInfo.id)=userInfo.currentUser
                     span.detail_span

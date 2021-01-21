@@ -118,16 +118,10 @@ Router.get('/follow/:title',auth,asyncMiddleware(async(req,res)=>{
     };
     await User.updateOne({_id:user},updateDoc);
     await Category.updateOne({title:cat},{$inc:{followersCount:1}});
-    res.redirect('/api/users/');
+    res.redirect('/home');
 
 }));
 
-Router.get('/:id',asyncMiddleware(async(req,res)=>{
-    let userInfo=await Post.findById(req.params.id);
-    const Path="F:\MiniQuora\Mini_Quora";
-    let filepath=path+userInfo.photo;
-    res.sendFile(filepath);
-}));
 
 
 module.exports=Router;

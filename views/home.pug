@@ -485,7 +485,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -496,7 +496,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='/api/users/') Home
+                    a.active(href='/home') Home
                     a.active(href='/api/notifications/following') Following
                     a.active(href='/api/notifications/') Notifications
         .container-fluid
@@ -521,11 +521,11 @@ html(lang='en')
                                           input.form-control(rows='3',name='title',type='text',placeholder='Ask any questions running in your mind')
                                       div.row.form-group
                                             .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
+                                                input.form-control(type='text',name="tags", placeholder='Enter 3 Tags')
                                             .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
+                                                input.form-control(type='text',name="tags", placeholder='all 3')
                                             .col-4
-                                                input.form-control(type='text',name="tags", placeholder='Enter Tags')
+                                                input.form-control(type='text',name="tags", placeholder='are neccessary')
                                       button.btn.post_button(type='submit') Post Question
 
 

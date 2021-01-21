@@ -205,7 +205,7 @@ html(lang='en')
         nav.navbar
             .row.navbar_elements
                 .col-2
-                    a.navbar-brand(href='#')
+                    a.navbar-brand(href='/home')
                         | Mini-Quora
                 .col-4
                     .searchbar
@@ -216,7 +216,7 @@ html(lang='en')
                                     i.material-icons search
                 .col-1
                 .col-3.links
-                    a.active(href='/api/users/') Home
+                    a.active(href='/home') Home
                     a.active(href='/api/notifications/following') Following
                     a.active(href='/api/notifications/') Notifications
 
@@ -226,7 +226,7 @@ html(lang='en')
                 .col-6.mainPanel
                     br
                     span.image_span
-                        img(src=`${userInfo.photo}`,alt='Avatar',class="avatar")
+                        img(src="/api/users/image/"+`${userInfo.photo}`,alt='Avatar',class="avatar")
                     span.edit_span(data-toggle='modal' data-target='#exampleModal')
                         | Edit Profile
                         | Picture
@@ -264,10 +264,10 @@ html(lang='en')
                                     input.form-control(name='profession',type='text',placeholder=`${userInfo.profession}`)
                                 div.form-group
                                     label Old Password
-                                    input.form-control(name='oldPas',type='password')
+                                    input.form-control(name='oldPas',type='password',placeholder="Please enter old password")
                                 div.form-group
                                     label New Password
-                                    input.form-control(name='newPas',type='password')
+                                    input.form-control(name='newPas',type='password',placeholder="Please enter new password")
 
                                 button.btn.save_now(type='submit') SAVE NOW
                         .col-2

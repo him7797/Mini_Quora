@@ -53,7 +53,7 @@ Router.post('/',auth,asyncMiddleware(async(req,res)=>{
     };
    await User.updateOne({_id:postBy},updateDoc);
    // res.send('success');
-   res.redirect('/api/users/');
+   res.redirect('/home');
 }));
 
 
@@ -169,7 +169,7 @@ Router.get('/like/:id',auth,asyncMiddleware(async(req,res)=>{
             }
         };
         await Post.updateOne({_id:postId},obj);
-        res.redirect('/api/users/');
+        res.redirect('/home');
     }
 }));
 

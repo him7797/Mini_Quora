@@ -33,7 +33,7 @@ Router.post('/:id',auth,asyncMiddleware(async(req,res)=>{
    }
    await User.updateOne({_id:createdBy},userUpdate);
    await Post.updateOne({_id:createdOn},postUpdate);
-   res.redirect('/api/users/');
+   res.redirect('/home');
 }));
 
 Router.get('/like/:id',auth,asyncMiddleware(async(req,res)=>{
@@ -63,7 +63,7 @@ Router.get('/like/:id',auth,asyncMiddleware(async(req,res)=>{
 
         };
         await Answer.updateOne({_id:ansId},obj);
-        res.redirect('/api/users/');
+        res.redirect('/home');
     }
   
 }));

@@ -2,7 +2,7 @@ const express = require("express");
 const Router = express.Router();
 const Validation=require('../validations/user');
 const User=require('../models/user');
-const Post=require('../models/post');
+// const Post=require('../models/post');
 const bcrypt=require('bcrypt');
 const Category=require('../models/category');
 const multer = require('multer');
@@ -13,9 +13,8 @@ const localstorage=require('local-storage');
 const auth=require('../middleware/auth');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
-    "July", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
+const sharp=require('sharp');
+
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
@@ -59,116 +58,6 @@ const upload = multer({ storage });
 
 
 
-//Rendering the Signup page
-Router.get('/signUp', asyncMiddleware(function(req, res){
-    res.render('SignUp');
-}));
-
-//Rendering the Login Page
-Router.get('/logIn', asyncMiddleware(function(req, res){
-    res.render('logIn');
-}));
-
-//Rendering and sending the Home page
-Router.get('/',auth,asyncMiddleware(async(req,res)=>{
-    let user=await User.findById(req.userData.id);
-    let posts=await Post.find({status:true}).sort({updatedAt:-1}).populate('postBy').populate('answers.answerId');
-    let allPosts=[];
-    let totalTags=[];
-    for(let i in posts) {
-        if (posts[i].answers.length > 0) {
-            let answerUser = await User.findById(posts[i].answers[0].answerId.createdBy);
-            let answerName = answerUser.name;
-            let answerProfession=answerUser.about;
-            let answerPhoto=answerUser.photo;
-            let obj;
-            obj = {
-                title: posts[i].title,
-                totalAnswers: posts[i].totalAnswers,
-                tags: posts[i].tags,
-                id:posts[i]._id,
-                answerId:answerUser._id,
-                answerIds:posts[i].answers[0].answerId._id,
-                userId:posts[i].postBy._id,
-                postBy: posts[i].postBy.name,
-                postByPhoto:posts[i].postBy.photo,
-                profession: posts[i].postBy.about,
-                answerName: answerName,
-                postLike:posts[i].totalLikes,
-                answerProfession:answerProfession,
-                answerPhoto:answerPhoto,
-                totalLikes: posts[i].answers[0].answerId.totalLikes,
-                description: posts[i].answers[0].answerId.description,
-                postYear: posts[i].createdAt.getFullYear(),
-                postMonth: monthNames[posts[i].createdAt.getMonth()],
-                postDate: posts[i].createdAt.getDate(),
-                answerYear:posts[i].answers[0].answerId.createdAt.getFullYear(),
-                answerMonth:monthNames[posts[i].answers[0].answerId.createdAt.getMonth()],
-                answerDate:posts[i].answers[0].answerId.createdAt.getDate()
-
-            };
-            allPosts.push(obj);
-            totalTags.push(posts[i].tags);
-        } else {
-            let obj;
-            obj = {
-                title: posts[i].title,
-                totalAnswers: posts[i].totalAnswers,
-                tags: posts[i].tags,
-                id:posts[i]._id,
-                userId:posts[i].postBy._id,
-                postBy: posts[i].postBy.name,
-                postLike:posts[i].totalLikes,
-                profession: posts[i].postBy.about,
-                postYear: posts[i].createdAt.getFullYear(),
-                postMonth: monthNames[posts[i].createdAt.getMonth()],
-                postDate: posts[i].createdAt.getDate(),
-                postByPhoto: posts[i].postBy.photo,
-                description:"Be the first one to answer!",
-                totalLikes:0
-            };
-            allPosts.push(obj);
-            totalTags.push(posts[i].tags);
-        }
-    }
-     user={
-        currentUser:user.name,
-        currentUserPhoto:user.photo,
-        id: req.userData.id
-    }
-    totalTags.push(user.interests);
-    let newTag=[];
-    for(let i in totalTags)
-    {
-        for(let j in totalTags[i])
-        {
-            newTag.push(totalTags[i][j]);
-        }
-    }
-    const unique=Array.from(new Set(newTag));
-    let categories=[];
-    for(let k in unique)
-    {
-        let catInfo=await Category.find({title:unique[k]});
-
-        if(catInfo.length===0)
-        {
-            categories.push({title:unique[k],description:"All About "+`${unique[k]}`+" Posts"});
-        }
-
-    }
-    await Category.insertMany(categories);
-
-
-
-res.render('home',{
-    posts:allPosts,
-    userInfo:user,
-    tags:unique
-});
-
-}));
-
 //Sign Up Route
 Router.post('/signUp',asyncMiddleware(async(req,res)=>{
         let obj={
@@ -195,7 +84,7 @@ Router.post('/signUp',asyncMiddleware(async(req,res)=>{
             password:req.body.password,
             about:req.body.profession,
             dob:req.body.dob,
-            photo:'/public/Baby Yoda.jpeg'
+            photo:'43492e86ba2646b987b5c93a84741095.jpeg'
         }
         let newUser=new User(finalObj);
         const salt=await bcrypt.genSalt(10);
@@ -232,7 +121,7 @@ const validPassword=await bcrypt.compare(req.body.password,checkUser.password);
         }
     )
     localstorage.set('token',token);
-    res.redirect('/api/users');
+    res.redirect('/home');
 }));
 
 //Logout Route
@@ -265,13 +154,12 @@ Router.post('/change-password-email',auth,asyncMiddleware(async(req,res)=>{
         newPas=await bcrypt.hash(newPas,salt);
         let newDoc={
             $set:{
-                password:newPas,
-                about:req.body.profession
+                password:newPas
             }
         }
         await User.updateOne({email:email},newDoc);
-        localstorage.clear();
-        res.render('logIn');
+        
+        res.redirect('/api/users/logout');
     }
     return res.status(401).json({
         status: "Failed",
@@ -301,7 +189,7 @@ Router.post('/change/ProfilePic',auth,upload.single('file'),asyncMiddleware(asyn
             photo:Path,
 
         };
-        res.render('Profile',{
+        return res.render('Profile',{
             userInfo:UserInfo
         });
     }
@@ -347,6 +235,7 @@ Router.get('/:id',auth,asyncMiddleware(async(req,res)=>{
     });
 }));
 
+//Edit Profile Of a User
 Router.get('/editProfile/:id',auth,asyncMiddleware(async(req,res)=>{
         let user=await User.findById(req.params.id);
         let obj={
